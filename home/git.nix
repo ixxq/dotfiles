@@ -7,7 +7,7 @@
 let
   gitVersion = "2.55.0";
 
-  userEmail = "83203852+lemtoc@users.noreply.github.com";
+  userEmail = "83203852+ve62ca@users.noreply.github.com";
 
   # ローカルで `git log --show-signature` を通すための信頼済み公開鍵。
   # 鍵の実体は不要なので、そのホストに存在しない鍵も載せてよい。
@@ -57,7 +57,7 @@ in
 
     settings = {
       user = {
-        name = "lemtoc";
+        name = "ve62ca";
         email = userEmail;
       };
       gpg.ssh.allowedSignersFile = allowedSignersFile;

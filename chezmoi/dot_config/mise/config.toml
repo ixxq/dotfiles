@@ -51,7 +51,7 @@ run = 'aws ec2 stop-instances --instance-ids "$(cat "$HOME/.config/dpca/instance
 
 [tools]
 bun = "latest"
-"github:lemtoc/awsctx" = "latest"
+"github:ve62ca/awsctx" = "latest"
 ni = "latest"
 node = "lts"
 pinact = "latest"

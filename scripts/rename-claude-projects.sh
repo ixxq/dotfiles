@@ -37,8 +37,8 @@ Options:
   -h, --help             Show this help
 
 Examples:
-  rename-claude-projects.sh --old lemtoc --new t1190078 --dry-run
-  rename-claude-projects.sh --old lemtoc --new t1190078
+  rename-claude-projects.sh --old lemtoc --new ve62ca --dry-run
+  rename-claude-projects.sh --old lemtoc --new ve62ca
   rename-claude-projects.sh --old mfyuu  --new t1190078 --rewrite-content
 
 Notes:
