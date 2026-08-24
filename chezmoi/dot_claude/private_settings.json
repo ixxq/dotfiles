@@ -27,7 +27,7 @@
       "Bash(gh pr create:*)",
       "Bash(rm:*)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "hooks": {
     "Stop": [
@@ -67,7 +67,16 @@
     "typescript-lsp@claude-plugins-official": true,
     "hono-skill@hono-skill": true,
     "swift-lsp@claude-plugins-official": true,
-    "figma@claude-plugins-official": true
+    "figma@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
   },
   "outputStyle": "Explanatory",
   "language": "Japanese",
