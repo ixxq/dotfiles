@@ -1,3 +1,7 @@
+## Orchestration
+
+- For Issue drafting, design, implementation, review, merging, or deployment, use `$orchestrator` throughout the task unless a more specific repository orchestrator applies.
+
 ## Tool use
 
 - In Code Mode, within each bounded stage, run independent, functions.exec-available tool calls concurrently in one functions.exec call. Use `await Promise.allSettled([...])` when partial results are useful, and inspect every result; use `await Promise.all([...])` only when any failure should abort the batch. Keep dependencies, waits/resumes, approvals, conflicting or interdependent mutations, and adaptive investigations sequential.
@@ -20,3 +24,5 @@
 ## Pull requests
 
 - Before creating a pull request, check for and follow any repository PR template.
+
+@/Users/t1190078/.codex/RTK.md

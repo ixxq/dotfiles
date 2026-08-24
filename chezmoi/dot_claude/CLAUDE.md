@@ -14,3 +14,5 @@
   - Fall back to `rg`/`find` only for non-symbol text: comments, markdown, log strings, config values, or when LSP cannot resolve the language.
   - If `LSP` is not loaded yet, load it via `ToolSearch` with `select:LSP` before first use.
 - After editing code, check LSP diagnostics (e.g. `mcp__ide__getDiagnostics` or the `LSP` tool's diagnostics operation) to surface type/lint errors immediately, rather than waiting for a separate `typecheck`/`lint` run. Still run the project's `typecheck`/`lint` commands before declaring a task complete.
+
+@RTK.md
