@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786637009185,
+  "lastUpdate": 1787554403520,
   "repoUrl": "https://github.com/lemtoc/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -4665,6 +4665,65 @@ window.BENCHMARK_DATA = {
             "range": "18.64 ms",
             "unit": "ms",
             "extra": "median: 36.94 ms\nmin: 35.12 ms\nmax: 113.84 ms\nstddev: 18.64 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+lemtoc@users.noreply.github.com",
+            "name": "lemtoc",
+            "username": "lemtoc"
+          },
+          "committer": {
+            "email": "83203852+lemtoc@users.noreply.github.com",
+            "name": "lemtoc",
+            "username": "lemtoc"
+          },
+          "distinct": true,
+          "id": "4fce781565e4f5bb205e186636efddadc5a32434",
+          "message": "chore(mise): add ni tool\n\n- install ni via mise for package-manager-agnostic script running\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+          "timestamp": "2026-08-24T15:52:31+09:00",
+          "tree_id": "f3491c7fb15ddd39f7ecc4dd7435a7d49133042d",
+          "url": "https://github.com/lemtoc/dotfiles/commit/4fce781565e4f5bb205e186636efddadc5a32434"
+        },
+        "date": 1787554402348,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 48.48,
+            "range": "3.74 ms",
+            "unit": "ms",
+            "extra": "median: 48.48 ms\nmin: 44.21 ms\nmax: 56.87 ms\nstddev: 3.74 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.92,
+            "range": "3.73 ms",
+            "unit": "ms",
+            "extra": "median: 48.92 ms\nmin: 44.62 ms\nmax: 57.27 ms\nstddev: 3.73 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.13 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.79 ms\nmax: 1.36 ms\nstddev: 0.13 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 16.11,
+            "range": "7.63 ms",
+            "unit": "ms",
+            "extra": "median: 16.11 ms\nmin: 1.39 ms\nmax: 19.51 ms\nstddev: 7.63 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 38.07,
+            "range": "2.99 ms",
+            "unit": "ms",
+            "extra": "median: 38.07 ms\nmin: 35.75 ms\nmax: 44.3 ms\nstddev: 2.99 ms\nruns: 16"
           }
         ]
       }
