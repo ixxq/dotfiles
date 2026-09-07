@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788745729896,
-  "repoUrl": "https://github.com/xrryx/dotfiles",
+  "lastUpdate": 1788798332567,
+  "repoUrl": "https://github.com/xlastz/dotfiles",
   "entries": {
     "Zsh Startup Time": [
       {
@@ -4783,6 +4783,65 @@ window.BENCHMARK_DATA = {
             "range": "2.17 ms",
             "unit": "ms",
             "extra": "median: 41.2 ms\nmin: 38.67 ms\nmax: 48.51 ms\nstddev: 2.17 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+xlastz@users.noreply.github.com",
+            "name": "k.suzuki",
+            "username": "xlastz"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d50490ad2d23a8b28939bce5fc35e112e16f8270",
+          "message": "chore(identity): migrate account references to xlastz (#12)\n\n* chore(identity): migrate account references to xlastz\n\n- Update Git author identity, Homebrew tap, and awsctx installation source\n- Refresh repository documentation and remote migration examples\n- Keep npm scopes and custom domains unchanged\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>\n\n* chore(nix): migrate nova input to xlastz labs\n\n- Update the nova input owner in the flake and lock file\n- Preserve the pinned revision and content hash\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>\n\n---------\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>",
+          "timestamp": "2026-09-08T01:24:43+09:00",
+          "tree_id": "94ea1d70debbb95dd244c265f7847f51b2633db3",
+          "url": "https://github.com/xlastz/dotfiles/commit/d50490ad2d23a8b28939bce5fc35e112e16f8270"
+        },
+        "date": 1788798331215,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 45.33,
+            "range": "3.05 ms",
+            "unit": "ms",
+            "extra": "median: 45.33 ms\nmin: 43.69 ms\nmax: 57.07 ms\nstddev: 3.05 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 45.74,
+            "range": "3.08 ms",
+            "unit": "ms",
+            "extra": "median: 45.74 ms\nmin: 44.08 ms\nmax: 57.64 ms\nstddev: 3.08 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.94,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.94 ms\nmin: 0.91 ms\nmax: 0.98 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 13.38,
+            "range": "7.35 ms",
+            "unit": "ms",
+            "extra": "median: 13.38 ms\nmin: 1.65 ms\nmax: 19.99 ms\nstddev: 7.35 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 44.66,
+            "range": "1.45 ms",
+            "unit": "ms",
+            "extra": "median: 44.66 ms\nmin: 43.99 ms\nmax: 49.81 ms\nstddev: 1.45 ms\nruns: 16"
           }
         ]
       }
