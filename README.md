@@ -20,7 +20,7 @@ macOS dotfiles managed with Nix flakes, nix-darwin, and home-manager.
 3. Clone this repository:
 
    ```bash
-   git clone https://github.com/lemtoc/dotfiles.git ~/.dotfiles
+   git clone https://github.com/xrryx/dotfiles.git ~/.dotfiles
    ```
 
 4. Configure chezmoi to use the source directory inside this repository:
@@ -85,7 +85,7 @@ chezmoi apply
 
 Zsh startup time is continuously tracked in CI. Every push to main runs 50 iterations with [hyperfine](https://github.com/sharkdp/hyperfine) and records the results.
 
-https://bench.lemtoc.me
+https://bench.ve62ca.me
 
 > [!NOTE]
 > These numbers are from GitHub Actions runners and may not reflect local performance. Use the trend to catch regressions, not as absolute measurements.

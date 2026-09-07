@@ -7,7 +7,7 @@ let
     "dimentium/autoraise"
     "k1low/tap"
     "kayac/tap"
-    "lemtoc/tap"
+    "xrryx/tap"
     "manaflow-ai/cmux"
     "productdevbook/tap"
   ];
@@ -30,7 +30,7 @@ in
       "k1low/tap/git-wt"
       "k1low/tap/mo"
       "kayac/tap/ecspresso"
-      "lemtoc/tap/muu"
+      "xrryx/tap/muu"
       "rtk"
     ];
     casks = [

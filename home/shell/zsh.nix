@@ -88,7 +88,7 @@ in
       warp = "open -a Warp";
       ccusage = "bunx ccusage@latest";
       difit = "bunx difit@latest";
-      biome-config = "bunx @lemtoc/biome-config";
+      biome-config = "bunx @xrryx/biome-config";
     };
 
     initContent = lib.mkMerge [

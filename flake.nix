@@ -1,5 +1,5 @@
 {
-  description = "lemtoc's dotfiles";
+  description = "xrryx's dotfiles";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nova = {
-      url = "github:lemtoc-labs/nova";
+      url = "github:xrryx-labs/nova";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -66,7 +66,7 @@
       };
       darwinConfigurations."M4Air" = mkDarwinConfig {
         hostName = "M4Air";
-        username = "lemtoc";
+        username = "ve62ca";
       };
       formatter.${system} = pkgs.nixfmt-tree;
 
