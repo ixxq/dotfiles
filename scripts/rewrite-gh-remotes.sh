@@ -35,9 +35,9 @@ Args:
                          If omitted, uses the current directory ($PWD).
 
 Examples:
-  rewrite-gh-remotes.sh --old ve62ca --new xrryx --dry-run
-  rewrite-gh-remotes.sh --old ve62ca --new xrryx
-  rewrite-gh-remotes.sh --old ve62ca --new xrryx ~/dev/private ~/dev/work
+  rewrite-gh-remotes.sh --old xrryx --new xlastz --dry-run
+  rewrite-gh-remotes.sh --old xrryx --new xlastz
+  rewrite-gh-remotes.sh --old xrryx --new xlastz ~/dev/private ~/dev/work
 USAGE
 }
 

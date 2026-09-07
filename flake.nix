@@ -1,5 +1,5 @@
 {
-  description = "xrryx's dotfiles";
+  description = "xlastz's dotfiles";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
