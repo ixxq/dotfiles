@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788805022378,
+  "lastUpdate": 1788805666363,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -4901,6 +4901,65 @@ window.BENCHMARK_DATA = {
             "range": "0.71 ms",
             "unit": "ms",
             "extra": "median: 44.18 ms\nmin: 43.39 ms\nmax: 45.75 ms\nstddev: 0.71 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "1e73b8752a83544ddfd370e8e11e2740272db98f",
+          "message": "chore(identity): integrate merged ixxq migration\n\n- Integrate the reviewed identity migration from origin/main.\n- Preserve all pre-existing local commits and Nix input pins.\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>",
+          "timestamp": "2026-09-08T03:17:13+09:00",
+          "tree_id": "ab07e8bf0ca76387f2afede1c7ad2a8146157df6",
+          "url": "https://github.com/ixxq/dotfiles/commit/1e73b8752a83544ddfd370e8e11e2740272db98f"
+        },
+        "date": 1788805664234,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 47.37,
+            "range": "3.41 ms",
+            "unit": "ms",
+            "extra": "median: 47.37 ms\nmin: 43.02 ms\nmax: 54.42 ms\nstddev: 3.41 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 47.75,
+            "range": "3.39 ms",
+            "unit": "ms",
+            "extra": "median: 47.75 ms\nmin: 43.45 ms\nmax: 54.75 ms\nstddev: 3.39 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.6 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.68 ms\nmax: 3.33 ms\nstddev: 0.6 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 16.11,
+            "range": "7.84 ms",
+            "unit": "ms",
+            "extra": "median: 16.11 ms\nmin: 0.68 ms\nmax: 19.87 ms\nstddev: 7.84 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 39.89,
+            "range": "3.73 ms",
+            "unit": "ms",
+            "extra": "median: 39.89 ms\nmin: 36.35 ms\nmax: 49.45 ms\nstddev: 3.73 ms\nruns: 16"
           }
         ]
       }
