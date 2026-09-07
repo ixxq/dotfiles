@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787554403520,
-  "repoUrl": "https://github.com/lemtoc/dotfiles",
+  "lastUpdate": 1788745729896,
+  "repoUrl": "https://github.com/xrryx/dotfiles",
   "entries": {
     "Zsh Startup Time": [
       {
@@ -4724,6 +4724,65 @@ window.BENCHMARK_DATA = {
             "range": "2.99 ms",
             "unit": "ms",
             "extra": "median: 38.07 ms\nmin: 35.75 ms\nmax: 44.3 ms\nstddev: 2.99 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+xrryx@users.noreply.github.com",
+            "name": "k.suzuki",
+            "username": "xrryx"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "30981f69eb87551519c3a94e2cc4f239bc4f4e07",
+          "message": "chore(identity): migrate account references to xrryx (#11)\n\n* chore(identity): migrate account references to ve62ca\n\n- Update GitHub, domain, Homebrew, mise, and Git identity references\n- Point the Nova flake input and lock file at ve62ca-labs\n- Align M4Air and migration examples with the renamed account\n- Track the renamed profile repository path in Codex\n\nCo-authored-by: Codex GPT-5.6 Sol Max <noreply@openai.com>\n\n* chore(identity): migrate account references to xrryx\n\n- Update GitHub, npm, and organization references for xrryx.\n- Keep host-specific usernames and the existing custom domain unchanged.\n\nCo-authored-by: Codex GPT-5.6 Sol Max <noreply@openai.com>\n\n---------\n\nCo-authored-by: ve62ca <83203852+ve62ca@users.noreply.github.com>\nCo-authored-by: Codex GPT-5.6 Sol Max <noreply@openai.com>",
+          "timestamp": "2026-09-07T10:48:00+09:00",
+          "tree_id": "fd9e0cfa1101ef14ddad28285d688c9370eb6e51",
+          "url": "https://github.com/xrryx/dotfiles/commit/30981f69eb87551519c3a94e2cc4f239bc4f4e07"
+        },
+        "date": 1788745727975,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 49.63,
+            "range": "5.75 ms",
+            "unit": "ms",
+            "extra": "median: 49.63 ms\nmin: 46.47 ms\nmax: 71.91 ms\nstddev: 5.75 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 50.02,
+            "range": "5.73 ms",
+            "unit": "ms",
+            "extra": "median: 50.02 ms\nmin: 46.79 ms\nmax: 72.24 ms\nstddev: 5.73 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.92,
+            "range": "0.25 ms",
+            "unit": "ms",
+            "extra": "median: 0.92 ms\nmin: 0.85 ms\nmax: 1.94 ms\nstddev: 0.25 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.23,
+            "range": "7.87 ms",
+            "unit": "ms",
+            "extra": "median: 2.23 ms\nmin: 1.32 ms\nmax: 19.68 ms\nstddev: 7.87 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 41.2,
+            "range": "2.17 ms",
+            "unit": "ms",
+            "extra": "median: 41.2 ms\nmin: 38.67 ms\nmax: 48.51 ms\nstddev: 2.17 ms\nruns: 16"
           }
         ]
       }
