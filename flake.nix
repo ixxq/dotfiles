@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nova = {
-      url = "github:xlastz-labs/nova";
+      url = "github:ixxq-labs/nova";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
