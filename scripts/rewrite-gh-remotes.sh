@@ -35,9 +35,9 @@ Args:
                          If omitted, uses the current directory ($PWD).
 
 Examples:
-  rewrite-gh-remotes.sh --old lemtoc --new ve62ca --dry-run
-  rewrite-gh-remotes.sh --old lemtoc --new ve62ca
-  rewrite-gh-remotes.sh --old lemtoc --new ve62ca ~/dev/private ~/dev/work
+  rewrite-gh-remotes.sh --old ve62ca --new xrryx --dry-run
+  rewrite-gh-remotes.sh --old ve62ca --new xrryx
+  rewrite-gh-remotes.sh --old ve62ca --new xrryx ~/dev/private ~/dev/work
 USAGE
 }
 

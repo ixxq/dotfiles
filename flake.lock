@@ -88,13 +88,13 @@
       "locked": {
         "lastModified": 1783689746,
         "narHash": "sha256-HjH1W/RKMTtMn89KERXRaqfubzpeGlZWoLp0X1w48zs=",
-        "owner": "ve62ca-labs",
+        "owner": "xrryx-labs",
         "repo": "nova",
         "rev": "9e938b472c4b7e899a80e61e10cde766ad4df20d",
         "type": "github"
       },
       "original": {
-        "owner": "ve62ca-labs",
+        "owner": "xrryx-labs",
         "repo": "nova",
         "type": "github"
       }
