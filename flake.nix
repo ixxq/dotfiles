@@ -1,5 +1,5 @@
 {
-  description = "xlastz's dotfiles";
+  description = "ixxq's dotfiles";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nova = {
-      url = "github:xlastz-labs/nova";
+      url = "github:ixxq-labs/nova";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
