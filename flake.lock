@@ -88,13 +88,13 @@
       "locked": {
         "lastModified": 1788745525,
         "narHash": "sha256-kmW8/10MT15N+iHwBW66efU+SwYK8LHaY8GTepvFlNM=",
-        "owner": "xlastz-labs",
+        "owner": "ixxq-labs",
         "repo": "nova",
         "rev": "22811140dca758037147eb84e1c3247ed14016e7",
         "type": "github"
       },
       "original": {
-        "owner": "xlastz-labs",
+        "owner": "ixxq-labs",
         "repo": "nova",
         "type": "github"
       }
