@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788798332567,
-  "repoUrl": "https://github.com/xlastz/dotfiles",
+  "lastUpdate": 1788805022378,
+  "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
       {
@@ -4842,6 +4842,65 @@ window.BENCHMARK_DATA = {
             "range": "1.45 ms",
             "unit": "ms",
             "extra": "median: 44.66 ms\nmin: 43.99 ms\nmax: 49.81 ms\nstddev: 1.45 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "k.suzuki",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "595be20ab13b64957c240858e7f3dc5e9fe042d9",
+          "message": "chore(identity): migrate account references to ixxq (#13)\n\n* chore(identity): migrate account references to ixxq\n\n- Update the renamed GitHub identity and repository references.\n- Preserve package versions, pinned dependencies, and deferred npm settings.\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>\n\n* chore(identity): migrate labs references to ixxq\n\n- Align organization and repository references with ixxq-labs.\n- Preserve dependency pins and release versions.\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>\n\n---------\n\nCo-authored-by: Codex GPT-6 Astra Medium <noreply@openai.com>",
+          "timestamp": "2026-09-08T03:16:16+09:00",
+          "tree_id": "659e3e06295e33e977a64ca352aabf8d93838f3c",
+          "url": "https://github.com/ixxq/dotfiles/commit/595be20ab13b64957c240858e7f3dc5e9fe042d9"
+        },
+        "date": 1788805021018,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 44.47,
+            "range": "3.2 ms",
+            "unit": "ms",
+            "extra": "median: 44.47 ms\nmin: 43.35 ms\nmax: 56.93 ms\nstddev: 3.2 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 44.98,
+            "range": "3.18 ms",
+            "unit": "ms",
+            "extra": "median: 44.98 ms\nmin: 43.75 ms\nmax: 57.28 ms\nstddev: 3.18 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.94,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.94 ms\nmin: 0.92 ms\nmax: 0.99 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 14.28,
+            "range": "7.47 ms",
+            "unit": "ms",
+            "extra": "median: 14.28 ms\nmin: 1.54 ms\nmax: 20.57 ms\nstddev: 7.47 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 44.18,
+            "range": "0.71 ms",
+            "unit": "ms",
+            "extra": "median: 44.18 ms\nmin: 43.39 ms\nmax: 45.75 ms\nstddev: 0.71 ms\nruns: 16"
           }
         ]
       }
