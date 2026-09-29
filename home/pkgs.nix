@@ -1,4 +1,25 @@
 { pkgs, ... }:
+let
+  # Remove these overrides once nixpkgs includes awscli2 >= 2.37.2.
+  awsCrt = pkgs.python3Packages.awscrt.overridePythonAttrs (old: rec {
+    version = "0.37.0";
+    src = pkgs.fetchPypi {
+      inherit (old) pname;
+      inherit version;
+      hash = "sha256-ni3a3GCQhLX2Cv+4uH53ME/tZOJx4rK3VYGGz2XYHlo=";
+    };
+  });
+  awsCli = pkgs.awscli2.overridePythonAttrs (old: rec {
+    version = "2.37.3";
+    src = old.src.override {
+      tag = version;
+      hash = "sha256-1T1EhgZmRcUFKc1DNNXTjFAPIvVOMimYwsZ/EPuUzRI=";
+    };
+    dependencies = map (
+      dependency: if (dependency.pname or "") == "awscrt" then awsCrt else dependency
+    ) old.dependencies;
+  });
+in
 {
   # zoxide, eza, fzf, direnv are managed by programs.* modules (home/shell/*.nix)
   # nova is managed by home/shell/nova.nix
@@ -15,7 +36,7 @@
     uv
     # CLI tools
     actionlint
-    awscli2
+    awsCli
     bat
     chezmoi
     fd

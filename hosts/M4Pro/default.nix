@@ -1,6 +1,5 @@
 {
   username,
-  lib,
   pkgs,
   ...
 }:
@@ -18,10 +17,6 @@ in
 {
   # M4Pro-specific configuration (corporate SSL certificate, Secure Enclave signing)
   home-manager.users.${username} = {
-    home.sessionPath = lib.mkBefore [
-      "/Users/${username}/dev/oss/aws-cli/.venv-local/bin"
-    ];
-
     home.sessionVariables = {
       DENO_CERT = customCert;
       NODE_EXTRA_CA_CERTS = customCert;
