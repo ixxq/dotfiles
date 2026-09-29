@@ -5,7 +5,7 @@
   ...
 }:
 let
-  gitVersion = "2.55.0";
+  gitVersion = "2.56.0";
 
   userEmail = "83203852+ixxq@users.noreply.github.com";
 
@@ -33,12 +33,13 @@ in
       version = gitVersion;
       src = pkgs.fetchurl {
         url = "https://www.kernel.org/pub/software/scm/git/git-${gitVersion}.tar.xz";
-        hash = "sha256-RX/bBNyHKOAH1GiGleaRLm9oByeSDypAvxHqzBdQU1c=";
+        hash = "sha256-JsVsKWs4wGlbJvqV9HXx0BcE0tOOc0ZcowsLL13HidM=";
       };
       patches = builtins.filter (
         patch:
         !(pkgs.lib.hasInfix "expect-gui--askyesno-failure-in-t1517.patch" "${patch}")
         && !(pkgs.lib.hasInfix "osxkeychain-link-rust_lib.patch" "${patch}")
+        && !(pkgs.lib.hasInfix "darwin-unicode-filename-fix.patch" "${patch}")
       ) oldAttrs.patches;
       meta = oldAttrs.meta // {
         changelog = "https://github.com/git/git/blob/v${gitVersion}/Documentation/RelNotes/${gitVersion}.adoc";
