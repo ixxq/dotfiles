@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788805666363,
+  "lastUpdate": 1790726359696,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -4960,6 +4960,65 @@ window.BENCHMARK_DATA = {
             "range": "3.73 ms",
             "unit": "ms",
             "extra": "median: 39.89 ms\nmin: 36.35 ms\nmax: 49.45 ms\nstddev: 3.73 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "7fa02941c769ce48c188e82b6e564035465f64f3",
+          "message": "chore(git): upgrade to 2.56.0\n\n- Update the Git source version and archive hash to 2.56.0.\n- Exclude the Darwin Unicode filename patch now included upstream.\n\nCo-authored-by: Codex GPT-6 Astra Max <noreply@openai.com>",
+          "timestamp": "2026-09-30T08:58:00+09:00",
+          "tree_id": "e6c44ed27de55ad9b42d56236d375da0a3cbb641",
+          "url": "https://github.com/ixxq/dotfiles/commit/7fa02941c769ce48c188e82b6e564035465f64f3"
+        },
+        "date": 1790726357935,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 47.62,
+            "range": "4.41 ms",
+            "unit": "ms",
+            "extra": "median: 47.62 ms\nmin: 42.21 ms\nmax: 62.3 ms\nstddev: 4.41 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.02,
+            "range": "4.4 ms",
+            "unit": "ms",
+            "extra": "median: 48.02 ms\nmin: 42.64 ms\nmax: 62.69 ms\nstddev: 4.4 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.03 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.82 ms\nmax: 0.93 ms\nstddev: 0.03 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 3.56,
+            "range": "7.05 ms",
+            "unit": "ms",
+            "extra": "median: 3.56 ms\nmin: 1.07 ms\nmax: 17.99 ms\nstddev: 7.05 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 38.17,
+            "range": "2.52 ms",
+            "unit": "ms",
+            "extra": "median: 38.17 ms\nmin: 36.68 ms\nmax: 47.29 ms\nstddev: 2.52 ms\nruns: 16"
           }
         ]
       }
