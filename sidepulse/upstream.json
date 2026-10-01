@@ -1,0 +1,12 @@
+{
+  "version": "1.dev71+g6d55225fe",
+  "revision": "6d55225fed20a82521b23d86a4df2c4a15dff295",
+  "repository": "https://github.com/inteliwear/sidepulse",
+  "managed_files": [
+    "collector.py",
+    "install.py",
+    "providers.py",
+    "service.py",
+    "status_bar.py"
+  ]
+}
