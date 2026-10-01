@@ -66,6 +66,7 @@ in
       "manaflow-ai/cmux/cmux"
       "productdevbook/tap/portkiller"
       "stablyai/orca/orca"
+      "t3-code"
     ];
   };
 
