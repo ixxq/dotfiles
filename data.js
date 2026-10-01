@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1790726359696,
+  "lastUpdate": 1790859941517,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5019,6 +5019,65 @@ window.BENCHMARK_DATA = {
             "range": "2.52 ms",
             "unit": "ms",
             "extra": "median: 38.17 ms\nmin: 36.68 ms\nmax: 47.29 ms\nstddev: 2.52 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "943d77e21ec3b2abe88a5e930e50482d48e2d8e8",
+          "message": "chore(homebrew): add t3-code cask\n\n- Include t3-code in the shared macOS Homebrew cask list\n\nCo-authored-by: Codex GPT-6 Astra Max <noreply@openai.com>",
+          "timestamp": "2026-10-01T21:56:47+09:00",
+          "tree_id": "2f4de7704cce525634788227fd3ca53fcf754022",
+          "url": "https://github.com/ixxq/dotfiles/commit/943d77e21ec3b2abe88a5e930e50482d48e2d8e8"
+        },
+        "date": 1790859940131,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 47.74,
+            "range": "5.49 ms",
+            "unit": "ms",
+            "extra": "median: 47.74 ms\nmin: 41.86 ms\nmax: 62.55 ms\nstddev: 5.49 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.12,
+            "range": "5.51 ms",
+            "unit": "ms",
+            "extra": "median: 48.12 ms\nmin: 42.24 ms\nmax: 62.95 ms\nstddev: 5.51 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.93,
+            "range": "0.1 ms",
+            "unit": "ms",
+            "extra": "median: 0.93 ms\nmin: 0.78 ms\nmax: 1.17 ms\nstddev: 0.1 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.89,
+            "range": "7.16 ms",
+            "unit": "ms",
+            "extra": "median: 2.89 ms\nmin: 1.03 ms\nmax: 18.69 ms\nstddev: 7.16 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 43.14,
+            "range": "18.61 ms",
+            "unit": "ms",
+            "extra": "median: 43.14 ms\nmin: 37.9 ms\nmax: 116.94 ms\nstddev: 18.61 ms\nruns: 16"
           }
         ]
       }
