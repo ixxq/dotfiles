@@ -4,6 +4,7 @@
   "repository": "https://github.com/inteliwear/sidepulse",
   "managed_files": [
     "collector.py",
+    "event_animation.py",
     "install.py",
     "providers.py",
     "service.py",

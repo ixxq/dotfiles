@@ -39,6 +39,15 @@
             "command": "afplay -v 0.1 /System/Library/Sounds/Funk.aiff"
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
       }
     ],
     "Notification": [
@@ -48,6 +57,125 @@
           {
             "type": "command",
             "command": "afplay -v 0.1 /System/Library/Sounds/Funk.aiff"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
           }
         ]
       }

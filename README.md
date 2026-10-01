@@ -81,6 +81,12 @@ chezmoi apply
 > [!NOTE]
 > If running from outside the dotfiles directory, replace `.` with the path to the repository (e.g., `nix run ~/.dotfiles#update`).
 
+## SidePulse
+
+[SidePulse settings and customizations](sidepulse/README.md) documents the default
+and current LED behavior, restart / OFF / ON commands, and chezmoi-managed settings
+and Python files. Git records the upstream files before the local customizations.
+
 ## Benchmark
 
 Zsh startup time is continuously tracked in CI. Every push to main runs 50 iterations with [hyperfine](https://github.com/sharkdp/hyperfine) and records the results.

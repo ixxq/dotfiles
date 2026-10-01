@@ -1,0 +1,57 @@
+{
+  "agent_animation_profiles": {},
+  "agent_animations": {
+    "idle_ready": {
+      "style": "immediate-off"
+    }
+  },
+  "agent_list": {
+    "idle_timeout_seconds": 3600,
+    "recent_session_retention_seconds": 172800
+  },
+  "battery_monitoring": {
+    "full_charge_watts": null,
+    "power_change_preview_seconds": 7.0,
+    "show_on_power_change": true
+  },
+  "closed_lid_system_override_enabled": false,
+  "custom_agent_animations": {},
+  "devices": [
+    {
+      "brightness": 255,
+      "id": "/Volumes/SidePulse",
+      "led_display": "agent",
+      "name": "SidePulse",
+      "path": "/Volumes/SidePulse"
+    }
+  ],
+  "grok_session_open_action": "terminal",
+  "history": {
+    "timeframe_seconds": 43200
+  },
+  "led_display": "agent",
+  "lid_closed_animation": {
+    "duration_seconds": 1.3,
+    "program": "0:#000000 75ms ease; 7:#000000 75ms ease\n1:#000000 75ms ease; 6:#000000 75ms ease\n2:#000000 75ms ease; 5:#000000 75ms ease\n3:#000000 75ms ease; 4:#000000 75ms ease\n#000000 1s"
+  },
+  "lid_open_animation": {
+    "duration_seconds": 1.0,
+    "program": "off 90ms cosine\n3:#00E5FF 180ms ease; 4:#00E5FF 180ms ease; 2:#00E5FF 180ms ease 80ms; 5:#00E5FF 180ms ease 80ms\n1:#00FFB0 180ms ease; 6:#00FFB0 180ms ease; 0:#00FF66 180ms ease 80ms; 7:#00FF66 180ms ease 80ms\n#00FF66 220ms ease\noff 320ms ease-out"
+  },
+  "session_open_preferences": {},
+  "session_terminal": {
+    "app": "terminal",
+    "custom_path": ""
+  },
+  "setup_screen_completed": true,
+  "show_menu_bar_icon": true,
+  "sleep_prevention": {
+    "min_battery_percent": 20.0
+  },
+  "sleep_prevention_policy": "agents",
+  "transcript_monitoring": {
+    "claude": false,
+    "codex": false
+  },
+  "virtual_status_device_enabled": false
+}

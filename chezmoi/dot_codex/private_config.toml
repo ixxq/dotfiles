@@ -98,6 +98,7 @@ source_type = "git"
 source = "https://github.com/DietrichGebert/ponytail.git"
 
 [features]
+hooks = true
 js_repl = false
 codex_git_commit = true
 default_mode_request_user_input = true
@@ -438,3 +439,119 @@ trusted_hash = "sha256:3bb1b5698851a4cb59b06217761e4aca80c132daa04ecf23907de798b
 
 [hooks.state."/Users/t1190078/.codex/hooks.json:stop:1:0"]
 trusted_hash = "sha256:f4a4606a8eaf79e543104cf13eb6e95791fe4b0ab616ac78dccad7a85a8fc7b4"
+
+# >>> agent-monitor hooks >>>
+# Provider-neutral status collection. Do not edit inside this block.
+[[hooks.SessionStart]]
+matcher = "*"
+[[hooks.SessionStart.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.UserPromptSubmit]]
+matcher = "*"
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.PreToolUse]]
+matcher = "*"
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.PostToolUse]]
+matcher = "*"
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.PermissionRequest]]
+matcher = "*"
+[[hooks.PermissionRequest.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.PreCompact]]
+matcher = "*"
+[[hooks.PreCompact.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.PostCompact]]
+matcher = "*"
+[[hooks.PostCompact.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.SubagentStart]]
+matcher = "*"
+[[hooks.SubagentStart.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.SubagentStop]]
+matcher = "*"
+[[hooks.SubagentStop.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.Stop]]
+matcher = "*"
+[[hooks.Stop.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+
+[[hooks.Interrupt]]
+matcher = "*"
+[[hooks.Interrupt.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+timeout = 3
+
+[[hooks.SessionEnd]]
+matcher = "*"
+[[hooks.SessionEnd.hooks]]
+type = "command"
+command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+timeout = 3
+
+# <<< agent-monitor hooks <<<
+
+# SidePulse hooks already approved on this Mac; review /hooks after path or command changes.
+
+[hooks.state."/Users/t1190078/.codex/config.toml:pre_tool_use:0:0"]
+trusted_hash = "sha256:4290a9136ae08f433ecb9d700c96b11ae663521c741b405659db001cb5ae8cb6"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:permission_request:0:0"]
+trusted_hash = "sha256:9266b43a2cc86347f7fb0b03fb5bf6efde4058c92d1c35f76a4dee60b9253eee"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:post_tool_use:0:0"]
+trusted_hash = "sha256:6a54c8ff86e7fbd6e0ed14a349949066d6492cccb24ba1589710b75cc7a22713"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:pre_compact:0:0"]
+trusted_hash = "sha256:1b1bd3a082f704d4aec7883a825efe59679f8c0fd9d47aea820ade61a312d9d1"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:post_compact:0:0"]
+trusted_hash = "sha256:c9828d7dd8044cefd8ef05104637fb25af892bceafb8c45bb3dec5aafe892956"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:session_start:0:0"]
+trusted_hash = "sha256:70519109273613ae7d099a950fa559a15801c277b2693d5839aa142dced217f0"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:user_prompt_submit:0:0"]
+trusted_hash = "sha256:0cdc0aa52d736a3bc48f6dec15a87e0fd5967b9575cf69b3398ae743715c4806"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:subagent_start:0:0"]
+trusted_hash = "sha256:bcf36fbf397484eac1b65b7c919857999aff80cb5031da4ca37427b4e34c853d"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:subagent_stop:0:0"]
+trusted_hash = "sha256:b056ea8d47689cfb626bfd822159c665488f5a67c82fa10d8f0a65ce478aa32a"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:stop:0:0"]
+trusted_hash = "sha256:8fed9a6e2172f240c4ffbe4ca0b7f413416904a06bf8abf2ea168f969556adba"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:interrupt:0:0"]
+trusted_hash = "sha256:45c3ed0877ad566846758b758b58adf94a93d27a41938ffd165fa5c6f75b6bb9"
+
+[hooks.state."/Users/t1190078/.codex/config.toml:session_end:0:0"]
+trusted_hash = "sha256:55fc4c96ef3d329a3f6e498db205bd168a1fe6aaf095d36186364499eb69b194"
