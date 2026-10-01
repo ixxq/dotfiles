@@ -18,12 +18,18 @@ command -v jq >/dev/null 2>&1 || fail_provenance 'jq is not available'
 session_file="$(
   {
     rg --files "$codex_home/sessions" 2>/dev/null |
-      rg "${CODEX_THREAD_ID}\.jsonl$" |
+      rg "/rollout-[^/]*-${CODEX_THREAD_ID}(_[[:xdigit:]-]+)?\.jsonl$" |
+      sort |
       tail -n 1
   } || true
 )"
 
 [[ -n "$session_file" ]] || fail_provenance 'the current session JSONL was not found'
+
+# Resumed desktop rollouts can have a session-id suffix; verify the owner too.
+head -n 1 "$session_file" |
+  jq -e --arg thread "$CODEX_THREAD_ID" '.type == "session_meta" and .payload.id == $thread' >/dev/null ||
+  fail_provenance 'the selected session does not belong to the current thread'
 
 session_values="$(
   {
