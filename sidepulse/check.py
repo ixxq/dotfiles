@@ -35,6 +35,9 @@ def main():
         shutil.copytree(package, target / "sidepulse", ignore=shutil.ignore_patterns("__pycache__"))
         for path in files:
             shutil.copyfile(path, target / "sidepulse" / path.name)
+        settings_source = source.parent / "chezmoi/dot_config/sidepulse/agent-monitor"
+        shutil.copyfile(settings_source / "private_settings.json", target / "settings.json")
+        shutil.copytree(settings_source / "animations", target / "animations")
         for test in (source / "tests").glob("test_*.py"):
             shutil.copy2(test, target / test.name)
         return subprocess.run(

@@ -6,8 +6,9 @@ Gitには標準版のファイルを先に登録し、その次のコミット�
 設定ファイルはMac側の`~/.config/sidepulse/agent-monitor/settings.json`にある。
 CLIはMac側で動くPythonプログラムを指す。
 
-記録日: 2026-10-01。対象はmacOS、SidePulse Pro（8 LED）、CLI `1.dev71+g6d55225fe`。
+更新日: 2026-10-02。対象はmacOS、SidePulse Pro（8 LED）、CLI `1.dev71+g6d55225fe`。
 このMacには以下の変更を適用済み。確認や記録のために、復元手順をもう一度実行する必要はない。
+青い待機パルスを10分で消灯するカスタム演出もMacへ適用済み。
 
 ## 日常操作
 
@@ -67,18 +68,21 @@ sidepulse settings
 
 この表のデフォルトは、保存したバージョンのコード・設定から確認したもの。
 付属READMEの一般説明とは、特に完了色などが異なる場合がある。
+以前の比較表にあった「待機時に即時消灯」は、現在の「青い待機パルスを10分表示して消灯」へ変更済み。
 
-| 状況 | デフォルト | 今の設定・変更 |
+| 状況 | 標準の動作 | 今の動作・加えた変更 |
 | --- | --- | --- |
-| 待機 / 動作中のセッションなし | 控えめなシアンの待機パルス | 即時消灯（`immediate-off`） |
 | 作業 / ツール実行中 | シアンが流れる（`cyan-roll`） | 同じ |
-| 承認・入力待ち / エラー | オレンジが明滅（`amber-pulse`） | 同じ |
-| Codexの通常版`request_user_input` | 質問中もツール実行扱い | 質問中はオレンジ、回答後は通常表示 |
-| 返答の完了（`Stop`） | シアンの完了表示（`cyan-complete`） | 同じ。セッション終了とは区別する |
-| セッション終了（`SessionEnd`） | 完了扱い。Codexの標準登録にはこのフックがなかった | Codexにも登録し、終了セッションを表示対象から外す |
-| 終了したセッションの古いイベント | 再読込時に表示が戻ることがあった | 終了記録を保持して再点灯を防ぐ |
+| 通常の応答完了（`Stop`） | シアンの完了点灯（`cyan-complete`）を約20分保持 | 同じ。20分の期限もそのまま。セッション終了とは区別する |
+| 応答完了から約20分後 | 待機パルスへ切り替わる | 青い待機パルスへ切り替わり、さらに10分で消灯 |
+| 動作中のセッションがない | 控えめな待機パルス。指定色はシアン（実機では緑に見える）。繰り返し続ける | 青いパルスを10分繰り返して消灯 |
+| Codexアプリ / CLIを終了 | SidePulseの終了フック登録がなく、直前の表示が残り得る | `SessionEnd`を登録し、終了したセッションの表示を解除 |
+| Claude Codeを終了 | `SessionEnd`も「完了」として扱い、約20分表示する | 終了したセッションの表示を解除 |
+| 終了後の再起動 / ログ再読込 | 古いイベントや子エージェントの表示が戻る場合がある | 終了記録を保持し、再点灯を防ぐ |
 | Codexの新規・再開・clear | 起動専用の演出なし | 中央から虹が広がる約1.4秒 + 消える約0.6秒（計約2秒） |
 | Codex / Claude Codeのcompact中 | 通常の作業中と同じ | 紫のゆっくりした明滅（`purple-attention`） |
+| Codexの通常版`request_user_input` | 質問中もツール実行扱い | 質問中はオレンジ、回答後は通常表示 |
+| 承認・入力待ち / エラー | どちらもオレンジが明滅（`amber-pulse`） | 同じ。自動審査や承認済みコマンドによる誤点滅はまだ残る |
 
 起動の虹はアプリの起動だけでなく、Codexのメインセッションの`SessionStart`で
 `source`が`startup`・`resume`・`clear`のときに出る。子エージェントやcompact後の再開では出ない。
@@ -92,6 +96,15 @@ compact表示は、現在有効なセッションの最新イベントが`PreCom
 通常の集約は「エラー → 入力待ち → ツール実行 → 長時間処理 → 作業中 → 完了 → 待機」の順。
 最後のイベントによる単純な上書きではない。
 セッションを1つ終了しても、ほかに動作中のセッションがあればその状態を表示する。
+ほかに有効な状態がなければ、青い待機パルスになる。
+普通の返答完了後も、約20分間新しいイベントがなければ待機パルスへ戻る。
+待機パルスは中央4つのLEDを使う約4秒周期の明滅。
+標準の指定色はシアン（中央2つは`#00E5FF`）だが、このSidePulse Proでは緑に見えることを2026-10-02に実機確認したため、中央2つを`#0000FF`、その左右を暗い青の`#000060`に変更した。
+
+`Blue Idle Pulse then Off (10 min)`は、標準と同じ4秒周期を150回繰り返してから消灯する。
+SidePulse標準のカスタム演出機能と`repeat 150`を使い、Pythonのタイマーや20分の期限は変更しない。
+演出を書き込んだ時点から10分を数える。作業再開では通常表示へ切り替わり、次の待機時に数え直す。
+再起動・再接続などで演出を書き直した場合も、10分を数え直す。
 
 通常版`request_user_input`は、`PreToolUse`から対応する`PostToolUse`まで質問待ちとして表示する。
 同じセッションの別ツールの開始・終了では質問待ちを解除しない。割り込み・セッション終了でも解除する。
@@ -102,16 +115,17 @@ compact表示は、現在有効なセッションの最新イベントが`PreCom
 | ファイル | 用途 |
 | --- | --- |
 | [chezmoiのSidePulse設定](../chezmoi/dot_config/sidepulse/agent-monitor/private_settings.json) | `~/.config/sidepulse/agent-monitor/settings.json`の現在値 |
+| [10分の待機パルス](../chezmoi/dot_config/sidepulse/agent-monitor/animations/idle-pulse-10-min.LED) | 青い待機パルスを150回繰り返して消灯するカスタム演出 |
 | [Codex設定](../chezmoi/dot_codex/private_config.toml) | SidePulseの12イベント、`features.hooks`、このMacで承認済みのSidePulseフック状態 |
 | [Claude Code設定](../chezmoi/dot_claude/private_settings.json) | SidePulseの12イベント。元からある通知音のフックも保持 |
 | [chezmoiのPythonファイル](../chezmoi/dot_local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse) | 変更後のPythonコード6ファイル。`chezmoi apply`で実行先へ配置 |
 | [defaults/settings.json](defaults/settings.json) | `AgentMonitorSettings().to_dict()`から取り出したデフォルト設定 |
 | [upstream.json](upstream.json) | 対象バージョン、上流コミット、管理するPythonファイルの一覧 |
 | [LICENSE](LICENSE) | 保存したSidePulseコードのMITライセンス |
-| [check.py](check.py) / [tests](tests) | 一時コピーへchezmoiのコードを配置して21件の動作確認 |
+| [check.py](check.py) / [tests](tests) | 一時コピーへchezmoiのコード・設定・演出を配置して22件の動作確認 |
 | [公式README](https://github.com/inteliwear/sidepulse/blob/6d55225fed20a82521b23d86a4df2c4a15dff295/README.md) | 対象バージョンのCLI全体の参考資料 |
 
-設定JSONとデフォルトの差は、待機時の消灯、接続デバイス、初期設定完了フラグの3点。
+設定JSONとデフォルトの差は、待機演出の選択、カスタム演出の登録、接続デバイス、初期設定完了フラグの4点。
 そのほかの設定値も、現在の状態を見渡せるように保存している。
 
 CLIの差分は以下のとおり。
@@ -138,6 +152,7 @@ UIで設定を変えたら、chezmoiのソースへ取り込む。
 
 ```sh
 chezmoi add ~/.config/sidepulse/agent-monitor/settings.json
+chezmoi add ~/.config/sidepulse/agent-monitor/animations
 chezmoi add ~/.codex/config.toml
 chezmoi add ~/.claude/settings.json
 git -C ~/.dotfiles diff
@@ -160,14 +175,16 @@ Pythonコードはchezmoi側の6ファイルを編集し、下の検証を実行
 ~/.local/share/sidepulse/venv/bin/python -B ~/.dotfiles/sidepulse/check.py
 ```
 
-インストール済みのバージョンと配置先を確認してから、一時コピーへchezmoiの6ファイルを重ね、21件のテストを実行する。
+インストール済みのバージョンと配置先を確認してから、一時コピーへchezmoiの6ファイルと設定・演出を重ね、22件のテストを実行する。
 chezmoi側の編集は、実行先へ反映する前に検証できる。
 インストール済みコード、設定、フック、実機のLEDは書き換えない。
 macOSのSidePulse用Python環境を使用し、追加のテストライブラリは不要。
 
 終了時の消灯はCodexアプリとClaude Codeで実機確認済み。虹の起動演出も実機確認済み。
+終了時の消灯確認は待機表示を`immediate-off`にしていたときの記録。現在はセッション終了後も青い待機パルスになり、10分後に消灯する設定。
 虹の約2秒への延長とcompactの紫は、通知経路・LEDプログラムの描画をテスト済みだが、実物の見え方はまだ未確認。
 通常版`request_user_input`は回答前後、別ツール・別セッションとの同時稼働、状態復元とログ再集計をテスト済み。2026-10-02にMacへ適用し、質問中のオレンジ明滅を実機確認済み。回答後の通常表示への復帰は表示ログで確認済み。
+10分の待機パルスは、描画エンジンで青だけを使った10分間の明滅と、その後の消灯を確認済み。定期更新で演出が再開始しないことと、作業再開後の待機で再開始することも確認済み。2026-10-02にMacへ適用。実機での青の見え方と10分後の消灯はまだ未確認。
 
 ## CLIの更新後・別環境への復元
 
@@ -186,13 +203,13 @@ sidepulse --version
 ```
 
 まず前述の`check.py`で対象バージョン・配置先と動作を確認する。
-このMacではすでに実行先とchezmoi側のPythonファイルが一致しているため、今すぐ反映し直す必要はない。
+このMacのPythonファイルは反映済み。設定・カスタム演出は適用前に差分を確認する。
 復元先では、コードと設定の差分を確認する。
 Codex・ClaudeにはSidePulse以外の設定も含まれるため、特に既存環境では差分を確認する。
 
 ```sh
 SP_PACKAGE="$HOME/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse"
-chezmoi diff "$SP_PACKAGE" ~/.config/sidepulse/agent-monitor/settings.json ~/.codex/config.toml ~/.claude/settings.json
+chezmoi diff "$SP_PACKAGE" ~/.config/sidepulse/agent-monitor ~/.codex/config.toml ~/.claude/settings.json
 ```
 
 反映するときは自動制御を止め、インストール済みコードをバックアップしてから適用する。
@@ -201,7 +218,7 @@ chezmoi diff "$SP_PACKAGE" ~/.config/sidepulse/agent-monitor/settings.json ~/.co
 ```sh
 sidepulse service stop && sidepulse status-bar stop
 cp -a "$SP_PACKAGE" "$SP_PACKAGE.backup.$(date +%Y%m%d-%H%M%S)"
-chezmoi apply "$SP_PACKAGE" ~/.config/sidepulse/agent-monitor/settings.json ~/.codex/config.toml ~/.claude/settings.json
+chezmoi apply "$SP_PACKAGE" ~/.config/sidepulse/agent-monitor ~/.codex/config.toml ~/.claude/settings.json
 
 # 復元先のホーム・Pythonのパスで登録し直す（追加したSessionEndも対象）
 sidepulse agent-monitor install codex
@@ -229,11 +246,12 @@ sidepulse service start && sidepulse status-bar start
 ただし、保存状態やログからの復元、新しい承認要求でオレンジに戻ることがあり、
 再起動は完全な状態初期化や根本修正にはならない。
 
-### エージェントを閉じたのに消えない
+### エージェントを閉じても作業中の表示が残る
 
 ほかのセッションが作業中・入力待ちではないか、`SessionEnd`が届いているかを確認する。
 返答の終了を表す`Stop`だけでは、セッションを終了したことにはならない。
 今回確認したのは通常の終了操作で、強制終了やクラッシュで終了通知が届かない場合は別途確認が必要。
+正常に終了した後も青い待機パルスを10分表示する。その間に新しい作業がなければ消灯する。
 
 ### 設定を戻す・変更を調べる
 
@@ -243,5 +261,5 @@ sidepulse service start && sidepulse status-bar start
 git diff --no-index ~/.dotfiles/sidepulse/defaults/settings.json ~/.dotfiles/chezmoi/dot_config/sidepulse/agent-monitor/private_settings.json
 ```
 
-待機時の光り方だけを標準へ戻すなら、SidePulseの設定画面でIdle / ReadyをIdle Pulseにする。
+待機表示を標準へ戻すなら、SidePulseの設定画面でIdle / ReadyをIdle Pulseにする。待機時に即時消灯するならImmediate Offにする。
 設定変更後は`chezmoi add`で取り込み、READMEの比較表も合わせて更新する。

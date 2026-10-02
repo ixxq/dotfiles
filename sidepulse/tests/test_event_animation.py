@@ -14,7 +14,7 @@ from sidepulse.led_status import AgentLedController, apply_brightness, program_f
 from sidepulse.led_wasm import SdLedWasmController
 from sidepulse.models import AgentMode, HookEvent
 from sidepulse.service import SidePulseService
-from sidepulse.settings import AgentMonitorSettings, LED_DISPLAY_AGENT
+from sidepulse.settings import AgentMonitorSettings, LED_DISPLAY_AGENT, load_settings
 from sidepulse.event_animation import AgentEventAnimation, rainbow_program
 from sidepulse.status_bar import StatusBarController
 
@@ -74,6 +74,29 @@ class StartupCheck(unittest.TestCase):
                 self.assertTrue(dim.parse(apply_brightness(program, 128), 0).ok)
                 dim_frames = {ms: dim.step(ms) for ms in range(0, 1401, 10)}
                 self.assertLess(sum(map(sum, dim_frames[1400])), sum(map(sum, frames[1400])) * 0.6)
+
+    def test_idle_pulse_turns_off_after_ten_minutes_and_restarts_after_work(self):
+        settings = load_settings(ROOT / 'settings.json')
+        animation = settings.agent_animation(AgentMode.IDLE_READY)
+        program = program_for_agent_mode(AgentMode.IDLE_READY, animation_style=animation.style,
+                                         custom_program=animation.custom_program)
+        engine = SdLedWasmController(8)
+        self.assertTrue(engine.parse(program, 0).ok)
+        frames = {ms: engine.step(ms) for ms in range(0, 608001, 100)}
+        self.assertTrue(all(red == green == 0 for frame in frames.values() for red, green, blue in frame))
+        self.assertTrue(any(blue > 0 for red, green, blue in frames[3000]))
+        for cycle in (0, 1, 149):
+            self.assertLess(sum(map(sum, frames[cycle * 4000 + 1000])),
+                            sum(map(sum, frames[cycle * 4000 + 3000])))
+        for ms in (600000, 601000, 608000):
+            self.assertTrue(all(color == (0, 0, 0) for color in frames[ms]))
+        led = AgentLedController(device_path=self.directory / 'LEDS.LED', dry_run=True)
+        idle = {'animation_style': animation.style, 'custom_program': animation.custom_program}
+        self.assertTrue(led.sync_mode(AgentMode.IDLE_READY, **idle).changed)
+        self.assertFalse(led.sync_mode(AgentMode.IDLE_READY, **idle).changed)
+        self.assertTrue(led.sync_mode(AgentMode.WORKING).changed)
+        self.assertTrue(led.sync_mode(AgentMode.IDLE_READY, **idle).changed)
+        self.assertFalse(led.device_path.exists())
 
     def test_only_live_codex_starts_and_resumes_trigger(self):
         for source in ('startup', 'resume', 'clear'):
