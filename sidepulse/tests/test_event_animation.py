@@ -55,9 +55,9 @@ class StartupCheck(unittest.TestCase):
             self.assertNotIn('repeat', program)
             engine = SdLedWasmController(count)
             self.assertTrue(engine.parse(program, 0).ok)
-            frames = {ms: engine.step(ms) for ms in range(0, 1501, 10)}
-            self.assertTrue(all(color == (0, 0, 0) for color in frames[1300]))
-            self.assertEqual(frames[1300], frames[1500])
+            frames = {ms: engine.step(ms) for ms in range(0, 2301, 10)}
+            self.assertTrue(all(color == (0, 0, 0) for color in frames[2100]))
+            self.assertEqual(frames[2100], frames[2300])
             compact = program_for_agent_mode(AgentMode.WORKING, led_count=count, animation_style='purple-attention')
             self.assertTrue(engine.parse(compact, 0).ok)
             purple_frames = [engine.step(ms) for ms in range(0, 3401, 20)]
@@ -66,14 +66,14 @@ class StartupCheck(unittest.TestCase):
             self.assertGreater(max(levels[90:]), 0)
             self.assertTrue(all(red == blue and green == 0 for frame in purple_frames for red, green, blue in frame))
             if count == 8:
-                for ms, indexes in ((100, {3, 4}), (300, {2, 3, 4, 5}), (500, set(range(1, 7))), (700, set(range(8)))):
+                for ms, indexes in ((200, {3, 4}), (550, {2, 3, 4, 5}), (900, set(range(1, 7))), (1250, set(range(8)))):
                     self.assertEqual({i for i, color in enumerate(frames[ms]) if max(color) > 0}, indexes)
-                self.assertEqual(len(set(frames[800])), 8)
-                self.assertLess(sum(map(sum, frames[1100])), sum(map(sum, frames[900])))
+                self.assertEqual(len(set(frames[1400])), 8)
+                self.assertLess(sum(map(sum, frames[1900])), sum(map(sum, frames[1600])))
                 dim = SdLedWasmController(count)
                 self.assertTrue(dim.parse(apply_brightness(program, 128), 0).ok)
-                dim_frames = {ms: dim.step(ms) for ms in range(0, 801, 10)}
-                self.assertLess(sum(map(sum, dim_frames[800])), sum(map(sum, frames[800])) * 0.6)
+                dim_frames = {ms: dim.step(ms) for ms in range(0, 1401, 10)}
+                self.assertLess(sum(map(sum, dim_frames[1400])), sum(map(sum, frames[1400])) * 0.6)
 
     def test_only_live_codex_starts_and_resumes_trigger(self):
         for source in ('startup', 'resume', 'clear'):
@@ -90,9 +90,9 @@ class StartupCheck(unittest.TestCase):
         intro.observe(event())
         self.clock.return_value = 100.8
         self.assertEqual(intro.select(AgentMode.IDLE_READY, NORMAL).style, 'custom')
-        self.clock.return_value = 101.9
+        self.clock.return_value = 102.7
         self.assertEqual(intro.select(AgentMode.WORKING, NORMAL).style, 'custom')
-        self.clock.return_value = 102.1
+        self.clock.return_value = 102.9
         self.assertIs(intro.select(AgentMode.WORKING, NORMAL), NORMAL)
         intro.observe(event())
         self.assertIs(intro.select(AgentMode.IDLE_READY, NORMAL), NORMAL)
@@ -126,7 +126,7 @@ class StartupCheck(unittest.TestCase):
         intro.select(AgentMode.IDLE_READY, NORMAL)
         self.clock.return_value = 104
         intro.observe(event(session='other', second=4))
-        self.clock.return_value = 104.3
+        self.clock.return_value = 105.1
         self.assertIs(intro.select(AgentMode.IDLE_READY, NORMAL), NORMAL)
         latest = self.directory / 'latest.json'
         monitor = LiveAgentMonitor(latest_state_path=latest)
@@ -194,7 +194,7 @@ class StartupCheck(unittest.TestCase):
         service.sync_outputs()
         self.assertEqual(writer.call_count, 1)
         service.ingest_event('codex', payload(event('UserPromptSubmit', second=1)))
-        self.clock.return_value = 101.3
+        self.clock.return_value = 102.1
         service.sync_outputs()
         regular = SETTINGS.agent_animation(AgentMode.WORKING)
         self.assertEqual(writer.call_args.args[0], program_for_agent_mode(AgentMode.WORKING, animation_style=regular.style))

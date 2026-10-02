@@ -192,6 +192,51 @@ class ExitBehavior(unittest.TestCase):
         for mode in (AgentMode.COMPLETED, AgentMode.WORKING, AgentMode.WAITING_FOR_INPUT):
             self.assertEqual(before.agent_animation(mode), after.agent_animation(mode))
 
+    def test_codex_question_waits_for_answer_in_live_and_replayed_events(self):
+        log = self.directory / "questions.jsonl"
+        state = self.directory / "questions-latest.json"
+        live = LiveAgentMonitor(latest_state_path=state)
+        records = []
+        steps = [
+            ("PreToolUse", "request_user_input", "test-session", AgentMode.WAITING_FOR_INPUT),
+            ("PreToolUse", "Bash", "test-session", AgentMode.WAITING_FOR_INPUT),
+            ("PostToolUse", "Bash", "test-session", AgentMode.WAITING_FOR_INPUT),
+            ("PreToolUse", "Bash", "other-session", AgentMode.WAITING_FOR_INPUT),
+            ("PostToolUse", "request_user_input", "test-session", AgentMode.TOOL_RUNNING),
+            ("PostToolUse", "Bash", "other-session", AgentMode.WORKING),
+        ]
+        for second, (name, tool, session, expected) in enumerate(steps):
+            with self.subTest(event=name, tool=tool, session=session):
+                record = event(name, session=session, second=second)
+                record = replace(record, tool_name=tool, raw={**record.raw, "tool_name": tool})
+                records.append(record)
+                live.ingest_record(record)
+                write_events(log, records)
+                replay = AgentMonitor(sources=[SourceSpec("codex", log)])
+                self.assertEqual(live.snapshot().aggregate.mode, expected)
+                self.assertEqual(replay.snapshot().aggregate.mode, expected)
+                if second == 1:
+                    live = LiveAgentMonitor(latest_state_path=state)
+
+    def test_question_exit_and_other_tools_keep_their_existing_meaning(self):
+        question = event("PreToolUse")
+        question = replace(question, tool_name="request_user_input",
+                           raw={**question.raw, "tool_name": "request_user_input"})
+        for name, expected in (("Interrupt", AgentMode.IDLE_READY),
+                               ("SessionEnd", AgentMode.IDLE_READY),
+                               ("Stop", AgentMode.COMPLETED)):
+            with self.subTest(event=name):
+                monitor = LiveAgentMonitor()
+                monitor.ingest_record(question)
+                monitor.ingest_record(event(name, second=1))
+                self.assertEqual(monitor.snapshot().aggregate.mode, expected)
+        for provider, tool in (("codex", "Bash"), ("codex", "request_user_input_async"),
+                               ("claude", "request_user_input")):
+            with self.subTest(provider=provider, tool=tool):
+                record = event("PreToolUse", provider)
+                record = replace(record, tool_name=tool, raw={**record.raw, "tool_name": tool})
+                self.assertEqual(status_from_event(record).mode, AgentMode.TOOL_RUNNING)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

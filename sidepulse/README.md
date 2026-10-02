@@ -73,10 +73,11 @@ sidepulse settings
 | 待機 / 動作中のセッションなし | 控えめなシアンの待機パルス | 即時消灯（`immediate-off`） |
 | 作業 / ツール実行中 | シアンが流れる（`cyan-roll`） | 同じ |
 | 承認・入力待ち / エラー | オレンジが明滅（`amber-pulse`） | 同じ |
+| Codexの通常版`request_user_input` | 質問中もツール実行扱い | 質問中はオレンジ、回答後は通常表示 |
 | 返答の完了（`Stop`） | シアンの完了表示（`cyan-complete`） | 同じ。セッション終了とは区別する |
 | セッション終了（`SessionEnd`） | 完了扱い。Codexの標準登録にはこのフックがなかった | Codexにも登録し、終了セッションを表示対象から外す |
 | 終了したセッションの古いイベント | 再読込時に表示が戻ることがあった | 終了記録を保持して再点灯を防ぐ |
-| Codexの新規・再開・clear | 起動専用の演出なし | 中央から虹が広がる約0.8秒 + 消える約0.4秒 |
+| Codexの新規・再開・clear | 起動専用の演出なし | 中央から虹が広がる約1.4秒 + 消える約0.6秒（計約2秒） |
 | Codex / Claude Codeのcompact中 | 通常の作業中と同じ | 紫のゆっくりした明滅（`purple-attention`） |
 
 起動の虹はアプリの起動だけでなく、Codexのメインセッションの`SessionStart`で
@@ -92,6 +93,10 @@ compact表示は、現在有効なセッションの最新イベントが`PreCom
 最後のイベントによる単純な上書きではない。
 セッションを1つ終了しても、ほかに動作中のセッションがあればその状態を表示する。
 
+通常版`request_user_input`は、`PreToolUse`から対応する`PostToolUse`まで質問待ちとして表示する。
+同じセッションの別ツールの開始・終了では質問待ちを解除しない。割り込み・セッション終了でも解除する。
+非同期版`request_user_input_async`と、自動審査や承認済みコマンドによる誤点滅は、この対応の対象外。
+
 ## 管理するファイル
 
 | ファイル | 用途 |
@@ -103,7 +108,7 @@ compact表示は、現在有効なセッションの最新イベントが`PreCom
 | [defaults/settings.json](defaults/settings.json) | `AgentMonitorSettings().to_dict()`から取り出したデフォルト設定 |
 | [upstream.json](upstream.json) | 対象バージョン、上流コミット、管理するPythonファイルの一覧 |
 | [LICENSE](LICENSE) | 保存したSidePulseコードのMITライセンス |
-| [check.py](check.py) / [tests](tests) | 一時コピーへchezmoiのコードを配置して19件の動作確認 |
+| [check.py](check.py) / [tests](tests) | 一時コピーへchezmoiのコードを配置して21件の動作確認 |
 | [公式README](https://github.com/inteliwear/sidepulse/blob/6d55225fed20a82521b23d86a4df2c4a15dff295/README.md) | 対象バージョンのCLI全体の参考資料 |
 
 設定JSONとデフォルトの差は、待機時の消灯、接続デバイス、初期設定完了フラグの3点。
@@ -112,7 +117,7 @@ compact表示は、現在有効なセッションの最新イベントが`PreCom
 CLIの差分は以下のとおり。
 
 - `providers.py` / `install.py`: Codexの`SessionEnd`を登録対象に追加し、終了フックのタイムアウトを3秒にする。
-- `collector.py`: 返答完了とセッション終了を分け、古いログや子エージェントで終了状態が復活するのを防ぐ。
+- `collector.py`: 返答完了とセッション終了を分け、古いログや子エージェントで終了状態が復活するのを防ぐ。通常版`request_user_input`の質問待ちを識別する。
 - `event_animation.py`: Codexの起動演出とcompact中の演出を選ぶ。
 - `service.py` / `status_bar.py`: バックグラウンド側・メニューバー側の両方で演出を使う。
 
@@ -155,13 +160,14 @@ Pythonコードはchezmoi側の6ファイルを編集し、下の検証を実行
 ~/.local/share/sidepulse/venv/bin/python -B ~/.dotfiles/sidepulse/check.py
 ```
 
-インストール済みのバージョンと配置先を確認してから、一時コピーへchezmoiの6ファイルを重ね、19件のテストを実行する。
+インストール済みのバージョンと配置先を確認してから、一時コピーへchezmoiの6ファイルを重ね、21件のテストを実行する。
 chezmoi側の編集は、実行先へ反映する前に検証できる。
 インストール済みコード、設定、フック、実機のLEDは書き換えない。
 macOSのSidePulse用Python環境を使用し、追加のテストライブラリは不要。
 
-終了時の消灯はCodexアプリとClaude Codeで実機確認済み。
-虹とcompactの紫は、通知経路・LEDプログラムの描画をテスト済みだが、実物の見え方はまだ未確認。
+終了時の消灯はCodexアプリとClaude Codeで実機確認済み。虹の起動演出も実機確認済み。
+虹の約2秒への延長とcompactの紫は、通知経路・LEDプログラムの描画をテスト済みだが、実物の見え方はまだ未確認。
+通常版`request_user_input`は回答前後、別ツール・別セッションとの同時稼働、状態復元とログ再集計をテスト済み。2026-10-02にMacへ適用し、質問中のオレンジ明滅を実機確認済み。回答後の通常表示への復帰は表示ログで確認済み。
 
 ## CLIの更新後・別環境への復元
 
