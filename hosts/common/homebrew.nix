@@ -67,6 +67,7 @@ in
       "productdevbook/tap/portkiller"
       "stablyai/orca/orca"
       "t3-code"
+      "capsomnia"
     ];
   };
 
