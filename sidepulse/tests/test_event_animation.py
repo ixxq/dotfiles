@@ -15,7 +15,7 @@ from sidepulse.led_wasm import SdLedWasmController
 from sidepulse.models import AgentMode, HookEvent
 from sidepulse.service import SidePulseService
 from sidepulse.settings import AgentMonitorSettings, LED_DISPLAY_AGENT, load_settings
-from sidepulse.event_animation import AgentEventAnimation, rainbow_program
+from sidepulse.event_animation import AgentEventAnimation, compact_program, rainbow_program
 from sidepulse.status_bar import StatusBarController
 
 
@@ -69,6 +69,23 @@ class StartupCheck(unittest.TestCase):
             self.assertTrue(dim.parse(apply_brightness(program, 128), 0).ok)
             dim_frames = {ms: dim.step(ms) for ms in range(0, 1001, 10)}
             self.assertLess(sum(map(sum, dim_frames[1000])), sum(map(sum, frames[1000])) * 0.6)
+
+    def test_compact_pink_wave_moves_inward_and_repeats(self):
+        for count in (2, 8):
+            program = compact_program(count)
+            validate_led_text(program)
+            engine = SdLedWasmController(count)
+            self.assertTrue(engine.parse(program, 0).ok)
+            frames = {ms: engine.step(ms) for ms in range(0, 12001, 10)}
+            self.assertTrue(all(frame == frame[::-1] for frame in frames.values()))
+            self.assertTrue(all(red >= green and red >= blue for frame in frames.values()
+                                for red, green, blue in frame))
+            self.assertTrue(any(any(max(color) for color in frames[ms]) for ms in range(10000, 12001, 10)))
+            if count == 8:
+                for ms, indexes in ((1000, {0, 7}), (1200, {1, 6}), (1400, {2, 5}), (1600, {3, 4})):
+                    levels = [max(color) for color in frames[ms]]
+                    self.assertEqual({index for index, level in enumerate(levels) if level == max(levels)}, indexes)
+                self.assertGreater(frames[1600][3][1], frames[1000][0][1])
 
     def test_idle_pulse_turns_off_after_ten_minutes_and_restarts_after_work(self):
         settings = load_settings(ROOT / 'settings.json')
@@ -161,7 +178,7 @@ class StartupCheck(unittest.TestCase):
                     animation.observe(event())
                     monitor.ingest_record(event('PreCompact', provider=provider))
                     snapshot = monitor.snapshot()
-                    self.assertEqual(animation.select(snapshot.aggregate.mode, NORMAL, statuses=snapshot.statuses).style, 'purple-attention')
+                    self.assertEqual(animation.select(snapshot.aggregate.mode, NORMAL, statuses=snapshot.statuses).custom_program, compact_program())
                     monitor.ingest_record(event(ending, provider=provider, source='compact', second=1))
                     snapshot = monitor.snapshot()
                     self.assertIs(animation.select(snapshot.aggregate.mode, NORMAL, statuses=snapshot.statuses), NORMAL)
@@ -177,14 +194,14 @@ class StartupCheck(unittest.TestCase):
             snapshot = monitor.snapshot()
             return animation.select(snapshot.aggregate.mode, NORMAL, statuses=snapshot.statuses)
 
-        self.assertEqual(selected().style, 'purple-attention')
+        self.assertEqual(selected().custom_program, compact_program())
         for name in ('PermissionRequest', 'StopFailure'):
             monitor.ingest_record(event(name, session=name, second=1))
             self.assertIs(selected(), NORMAL)
             monitor.ingest_record(event('SessionEnd', session=name, second=2))
-            self.assertEqual(selected().style, 'purple-attention')
+            self.assertEqual(selected().custom_program, compact_program())
         monitor.ingest_record(event('PostCompact', second=3))
-        self.assertEqual(selected().style, 'purple-attention')
+        self.assertEqual(selected().custom_program, compact_program())
         monitor.ingest_record(event('SessionEnd', provider='claude', second=4))
         self.assertIs(selected(), NORMAL)
         monitor.ingest_record(event('PreCompact', provider='claude', second=2))
@@ -218,7 +235,7 @@ class StartupCheck(unittest.TestCase):
         self.assertEqual(writer.call_args.args[0], program_for_agent_mode(AgentMode.WORKING, animation_style=regular.style))
         service.ingest_event('codex', payload(event('PreCompact', second=2)))
         service.sync_outputs()
-        self.assertEqual(writer.call_args.args[0], program_for_agent_mode(AgentMode.WORKING, animation_style='purple-attention'))
+        self.assertEqual(writer.call_args.args[0], program_for_agent_mode(AgentMode.WORKING, animation_style='custom', custom_program=compact_program()))
         service.ingest_event('codex', payload(event('PostCompact', second=3)))
         service.sync_outputs()
         self.assertEqual(writer.call_args.args[0], program_for_agent_mode(AgentMode.WORKING, animation_style=regular.style))
@@ -253,7 +270,7 @@ class StartupCheck(unittest.TestCase):
         controller.handle_hook_event_message('claude', payload(event('PreCompact', provider='claude', second=1)))
         controller.last_snapshot = controller.monitor.snapshot()
         controller.sync_leds_now(controller.last_snapshot.aggregate.mode, None, LED_DISPLAY_AGENT)
-        self.assertEqual(led.last_program, program_for_agent_mode(AgentMode.WORKING, brightness=128, animation_style='purple-attention'))
+        self.assertEqual(led.last_program, program_for_agent_mode(AgentMode.WORKING, brightness=128, animation_style='custom', custom_program=compact_program()))
         controller.handle_hook_event_message('claude', payload(event('PostCompact', provider='claude', second=2)))
         controller.last_snapshot = controller.monitor.snapshot()
         controller.sync_leds_now(controller.last_snapshot.aggregate.mode, None, LED_DISPLAY_AGENT)
