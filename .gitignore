@@ -39,3 +39,6 @@ Temporary Items
 ### Nix ###
 result
 .codex-tmp
+
+### Python ###
+__pycache__/

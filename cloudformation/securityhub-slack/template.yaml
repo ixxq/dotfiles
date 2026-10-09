@@ -1,0 +1,298 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Security Hub notifications to Slack; Medium/High/Critical threats and High/Critical exposures and vulnerabilities.
+
+Parameters:
+  SlackWorkspaceId:
+    Type: String
+    Default: T012Y4GRQ9H
+    AllowedPattern: '^[A-Z0-9]{1,255}$'
+    Description: Slack workspace ID authorized in Amazon Q Developer in this AWS account.
+  SlackChannelId:
+    Type: String
+    AllowedPattern: '^[A-Za-z0-9]{1,256}$'
+    Description: Slack channel ID, such as C0123456789 (not a URL).
+  Author:
+    Type: String
+    Default: suzuki
+    MinLength: 1
+    MaxLength: 256
+    Description: Value of the Author resource tag.
+
+Resources:
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: security-notifications
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  NotificationChannelRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: chatbot.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: notification-metrics-read
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudwatch:Describe*
+                  - cloudwatch:Get*
+                  - cloudwatch:List*
+                Resource: '*'
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  SlackChannel:
+    Type: AWS::Chatbot::SlackChannelConfiguration
+    Properties:
+      ConfigurationName: !Sub 'security-notifications-${AWS::Region}'
+      SlackWorkspaceId: !Ref SlackWorkspaceId
+      SlackChannelId: !Ref SlackChannelId
+      IamRoleArn: !GetAtt NotificationChannelRole.Arn
+      GuardrailPolicies:
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchReadOnlyAccess'
+      UserRoleRequired: false
+      LoggingLevel: ERROR
+      SnsTopicArns:
+        - !Ref NotificationTopic
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  EventPublishRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+              ArnEquals:
+                aws:SourceArn:
+                  - !Sub 'arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/security-notifications-threats'
+                  - !Sub 'arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/security-notifications-exposures'
+                  - !Sub 'arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/security-notifications-vulnerabilities'
+      Policies:
+        - PolicyName: publish-notifications
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: sns:Publish
+                Resource: !Ref NotificationTopic
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  ThreatRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: security-notifications-threats
+      Description: Notify unresolved Medium/High/Critical GuardDuty findings, including suspicious activity.
+      EventBusName: default
+      State: ENABLED
+      EventPattern:
+        source: [aws.securityhub]
+        detail-type: [Findings Imported V2]
+        detail:
+          findings:
+            cloud:
+              account:
+                uid: [!Ref AWS::AccountId]
+            metadata:
+              product:
+                name: [GuardDuty]
+            severity: [Medium, High, Critical]
+            activity_name:
+              - anything-but: Close
+            status: [New, In Progress, Other, Unknown]
+      Targets:
+        - Id: SlackNotifications
+          Arn: !Ref NotificationTopic
+          RoleArn: !GetAtt EventPublishRole.Arn
+          RetryPolicy:
+            MaximumEventAgeInSeconds: 86400
+            MaximumRetryAttempts: 185
+          InputTransformer:
+            InputPathsMap:
+              title: $.detail.findings[0].finding_info.title
+              severity: $.detail.findings[0].severity
+              account: $.detail.findings[0].cloud.account.uid
+              region: $.detail.findings[0].cloud.region
+              product: $.detail.findings[0].metadata.product.name
+              status: $.detail.findings[0].status
+              activity: $.detail.findings[0].activity_name
+              uid: $.detail.findings[0].metadata.uid
+              resourcename: $.detail.findings[0].resources[0].name
+              resourcetype: $.detail.findings[0].resources[0].type
+              resourceuid: $.detail.findings[0].resources[0].uid
+            InputTemplate: !Sub |
+              {
+                "version": "1.0",
+                "source": "custom",
+                "content": {
+                  "textType": "client-markdown",
+                  "title": "[脅威 / <severity>]",
+                  "description": "<title>\n\nリソース名: <resourcename>\n種類: <resourcetype>\nID: <resourceuid>\n\nhttps://${AWS::Region}.console.aws.amazon.com/securityhub/v2/home?region=${AWS::Region}#/threats?search=metadata.uid%3D%255Coperator%255C%253AEQUALS%255C%253A<uid>&groupbyfield=finding_info.title&findingDetailId=<uid>&detailPanelTabId=Resources",
+                  "nextSteps": [
+                    "アカウント: <account> / リージョン: <region>",
+                    "検出元: <product> / ステータス: <status> / プロバイダー: <activity>",
+                    "指摘ID: <uid>"
+                  ]
+                }
+              }
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  ExposureRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: security-notifications-exposures
+      Description: Notify unresolved High/Critical Security Hub exposure findings.
+      EventBusName: default
+      State: ENABLED
+      EventPattern:
+        source: [aws.securityhub]
+        detail-type: [Findings Imported V2]
+        detail:
+          findings:
+            cloud:
+              account:
+                uid: [!Ref AWS::AccountId]
+            metadata:
+              product:
+                feature:
+                  uid: [security-hub/Exposure]
+            severity: [High, Critical]
+            activity_name:
+              - anything-but: Close
+            status: [New, In Progress, Other, Unknown]
+      Targets:
+        - Id: SlackNotifications
+          Arn: !Ref NotificationTopic
+          RoleArn: !GetAtt EventPublishRole.Arn
+          RetryPolicy:
+            MaximumEventAgeInSeconds: 86400
+            MaximumRetryAttempts: 185
+          InputTransformer:
+            InputPathsMap:
+              title: $.detail.findings[0].finding_info.title
+              severity: $.detail.findings[0].severity
+              account: $.detail.findings[0].cloud.account.uid
+              region: $.detail.findings[0].cloud.region
+              product: $.detail.findings[0].metadata.product.name
+              status: $.detail.findings[0].status
+              activity: $.detail.findings[0].activity_name
+              uid: $.detail.findings[0].metadata.uid
+              resourcename: $.detail.findings[0].resources[0].name
+              resourcetype: $.detail.findings[0].resources[0].type
+              resourceuid: $.detail.findings[0].resources[0].uid
+            InputTemplate: !Sub |
+              {
+                "version": "1.0",
+                "source": "custom",
+                "content": {
+                  "textType": "client-markdown",
+                  "title": "[露出 / <severity>]",
+                  "description": "<title>\n\nリソース名: <resourcename>\n種類: <resourcetype>\nID: <resourceuid>\n\nhttps://${AWS::Region}.console.aws.amazon.com/securityhub/v2/home?region=${AWS::Region}#/exposure?search=metadata.uid%3D%255Coperator%255C%253AEQUALS%255C%253A<uid>&groupbyfield=finding_info.title&findingDetailId=<uid>&detailPanelTabId=Resources",
+                  "nextSteps": [
+                    "アカウント: <account> / リージョン: <region>",
+                    "検出元: <product> / ステータス: <status> / プロバイダー: <activity>",
+                    "指摘ID: <uid>"
+                  ]
+                }
+              }
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+  VulnerabilityRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: security-notifications-vulnerabilities
+      Description: Notify unresolved High/Critical Inspector findings.
+      EventBusName: default
+      State: ENABLED
+      EventPattern:
+        source: [aws.securityhub]
+        detail-type: [Findings Imported V2]
+        detail:
+          findings:
+            cloud:
+              account:
+                uid: [!Ref AWS::AccountId]
+            metadata:
+              product:
+                name: [Inspector]
+            severity: [High, Critical]
+            activity_name:
+              - anything-but: Close
+            status: [New, In Progress, Other, Unknown]
+      Targets:
+        - Id: SlackNotifications
+          Arn: !Ref NotificationTopic
+          RoleArn: !GetAtt EventPublishRole.Arn
+          RetryPolicy:
+            MaximumEventAgeInSeconds: 86400
+            MaximumRetryAttempts: 185
+          InputTransformer:
+            InputPathsMap:
+              title: $.detail.findings[0].finding_info.title
+              severity: $.detail.findings[0].severity
+              account: $.detail.findings[0].cloud.account.uid
+              region: $.detail.findings[0].cloud.region
+              product: $.detail.findings[0].metadata.product.name
+              status: $.detail.findings[0].status
+              activity: $.detail.findings[0].activity_name
+              uid: $.detail.findings[0].metadata.uid
+              resourcename: $.detail.findings[0].resources[0].name
+              resourcetype: $.detail.findings[0].resources[0].type
+              resourceuid: $.detail.findings[0].resources[0].uid
+            InputTemplate: !Sub |
+              {
+                "version": "1.0",
+                "source": "custom",
+                "content": {
+                  "textType": "client-markdown",
+                  "title": "[脆弱性 / <severity>]",
+                  "description": "<title>\n\nリソース名: <resourcename>\n種類: <resourcetype>\nID: <resourceuid>\n\nhttps://${AWS::Region}.console.aws.amazon.com/securityhub/v2/home?region=${AWS::Region}#/vulnerabilities?search=metadata.uid%3D%255Coperator%255C%253AEQUALS%255C%253A<uid>&groupbyfield=finding_info.title&findingDetailId=<uid>&detailPanelTabId=Resources",
+                  "nextSteps": [
+                    "アカウント: <account> / リージョン: <region>",
+                    "検出元: <product> / ステータス: <status> / プロバイダー: <activity>",
+                    "指摘ID: <uid>"
+                  ]
+                }
+              }
+      Tags:
+        - Key: Author
+          Value: !Ref Author
+
+Outputs:
+  AccountId:
+    Value: !Ref AWS::AccountId
+  NotificationTopicArn:
+    Value: !Ref NotificationTopic
+  SlackConfigurationArn:
+    Value: !Ref SlackChannel
+  ThreatRuleName:
+    Value: !Ref ThreatRule
+  ExposureRuleName:
+    Value: !Ref ExposureRule
+  VulnerabilityRuleName:
+    Value: !Ref VulnerabilityRule
