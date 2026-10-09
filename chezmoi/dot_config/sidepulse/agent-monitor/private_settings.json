@@ -2,7 +2,7 @@
   "agent_animation_profiles": {},
   "agent_animations": {
     "idle_ready": {
-      "style": "custom:idle-pulse-10-min"
+      "style": "custom:idle-edge-white-10-min"
     }
   },
   "agent_list": {
@@ -16,9 +16,9 @@
   },
   "closed_lid_system_override_enabled": false,
   "custom_agent_animations": {
-    "custom:idle-pulse-10-min": {
-      "name": "Blue Idle Pulse then Off (10 min)",
-      "file": "idle-pulse-10-min.LED"
+    "custom:idle-edge-white-10-min": {
+      "name": "White Edge Lights then Off (10 min)",
+      "file": "idle-edge-white-10-min.LED"
     }
   },
   "devices": [

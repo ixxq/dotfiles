@@ -87,7 +87,7 @@ class StartupCheck(unittest.TestCase):
                     self.assertEqual({index for index, level in enumerate(levels) if level == max(levels)}, indexes)
                 self.assertGreater(frames[1600][3][1], frames[1000][0][1])
 
-    def test_idle_pulse_turns_off_after_ten_minutes_and_restarts_after_work(self):
+    def test_idle_white_edges_stay_lit_for_ten_minutes_and_restart_after_work(self):
         settings = load_settings(ROOT / 'settings.json')
         animation = settings.agent_animation(AgentMode.IDLE_READY)
         program = program_for_agent_mode(AgentMode.IDLE_READY, animation_style=animation.style,
@@ -95,12 +95,11 @@ class StartupCheck(unittest.TestCase):
         engine = SdLedWasmController(8)
         self.assertTrue(engine.parse(program, 0).ok)
         frames = {ms: engine.step(ms) for ms in range(0, 608001, 100)}
-        self.assertTrue(all(red == green == 0 for frame in frames.values() for red, green, blue in frame))
-        self.assertTrue(any(blue > 0 for red, green, blue in frames[3000]))
-        for cycle in (0, 1, 149):
-            self.assertLess(sum(map(sum, frames[cycle * 4000 + 1000])),
-                            sum(map(sum, frames[cycle * 4000 + 3000])))
-        for ms in (600000, 601000, 608000):
+        self.assertTrue(all(red == green == blue for frame in frames.values() for red, green, blue in frame))
+        self.assertEqual(frames[1000], [(40, 40, 40), *[(0, 0, 0)] * 6, (40, 40, 40)])
+        for ms in range(1000, 599001, 100):
+            self.assertEqual(frames[ms], frames[1000])
+        for ms in (601000, 608000):
             self.assertTrue(all(color == (0, 0, 0) for color in frames[ms]))
         led = AgentLedController(device_path=self.directory / 'LEDS.LED', dry_run=True)
         idle = {'animation_style': animation.style, 'custom_program': animation.custom_program}
