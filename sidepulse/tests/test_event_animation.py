@@ -48,7 +48,8 @@ class StartupCheck(unittest.TestCase):
         self.enterContext(patch.object(Path, 'home', return_value=self.directory))
         self.clock = self.enterContext(patch('sidepulse.event_animation.time.monotonic', return_value=100.0))
 
-    def test_firmware_colors_center_out_fade_and_no_repeat(self):
+    def test_startup_uses_working_motion_once_and_finishes_dark(self):
+        self.assertEqual((ROOT / 'INIT.LED').read_text().strip(), rainbow_program())
         for count in (2, 8):
             program = rainbow_program(count)
             validate_led_text(program)
@@ -56,24 +57,18 @@ class StartupCheck(unittest.TestCase):
             engine = SdLedWasmController(count)
             self.assertTrue(engine.parse(program, 0).ok)
             frames = {ms: engine.step(ms) for ms in range(0, 2301, 10)}
-            self.assertTrue(all(color == (0, 0, 0) for color in frames[2100]))
-            self.assertEqual(frames[2100], frames[2300])
-            compact = program_for_agent_mode(AgentMode.WORKING, led_count=count, animation_style='purple-attention')
-            self.assertTrue(engine.parse(compact, 0).ok)
-            purple_frames = [engine.step(ms) for ms in range(0, 3401, 20)]
-            levels = [sum(map(sum, frame)) for frame in purple_frames]
-            self.assertGreater(max(levels), min(levels))
-            self.assertGreater(max(levels[90:]), 0)
-            self.assertTrue(all(red == blue and green == 0 for frame in purple_frames for red, green, blue in frame))
-            if count == 8:
-                for ms, indexes in ((200, {3, 4}), (550, {2, 3, 4, 5}), (900, set(range(1, 7))), (1250, set(range(8)))):
-                    self.assertEqual({i for i, color in enumerate(frames[ms]) if max(color) > 0}, indexes)
-                self.assertEqual(len(set(frames[1400])), 8)
-                self.assertLess(sum(map(sum, frames[1900])), sum(map(sum, frames[1600])))
-                dim = SdLedWasmController(count)
-                self.assertTrue(dim.parse(apply_brightness(program, 128), 0).ok)
-                dim_frames = {ms: dim.step(ms) for ms in range(0, 1401, 10)}
-                self.assertLess(sum(map(sum, dim_frames[1400])), sum(map(sum, frames[1400])) * 0.6)
+            working = SdLedWasmController(count)
+            self.assertTrue(working.parse(program_for_agent_mode(AgentMode.WORKING, led_count=count), 0).ok)
+            duration = 1340 if count == 2 else 1745
+            for ms in range(0, duration, 10):
+                self.assertEqual([max(color) for color in frames[ms]],
+                                 [max(color) for color in working.step(ms)])
+            for ms in (1800, 2100, 2300):
+                self.assertTrue(all(color == (0, 0, 0) for color in frames[ms]))
+            dim = SdLedWasmController(count)
+            self.assertTrue(dim.parse(apply_brightness(program, 128), 0).ok)
+            dim_frames = {ms: dim.step(ms) for ms in range(0, 1001, 10)}
+            self.assertLess(sum(map(sum, dim_frames[1000])), sum(map(sum, frames[1000])) * 0.6)
 
     def test_idle_pulse_turns_off_after_ten_minutes_and_restarts_after_work(self):
         settings = load_settings(ROOT / 'settings.json')
@@ -113,9 +108,9 @@ class StartupCheck(unittest.TestCase):
         intro.observe(event())
         self.clock.return_value = 100.8
         self.assertEqual(intro.select(AgentMode.IDLE_READY, NORMAL).style, 'custom')
-        self.clock.return_value = 102.7
+        self.clock.return_value = 102.5
         self.assertEqual(intro.select(AgentMode.WORKING, NORMAL).style, 'custom')
-        self.clock.return_value = 102.9
+        self.clock.return_value = 102.6
         self.assertIs(intro.select(AgentMode.WORKING, NORMAL), NORMAL)
         intro.observe(event())
         self.assertIs(intro.select(AgentMode.IDLE_READY, NORMAL), NORMAL)

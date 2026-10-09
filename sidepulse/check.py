@@ -38,6 +38,7 @@ def main():
         settings_source = source.parent / "chezmoi/dot_config/sidepulse/agent-monitor"
         shutil.copyfile(settings_source / "private_settings.json", target / "settings.json")
         shutil.copytree(settings_source / "animations", target / "animations")
+        shutil.copyfile(source.parent / "chezmoi/.chezmoitemplates/sidepulse/INIT.LED", target / "INIT.LED")
         for test in (source / "tests").glob("test_*.py"):
             shutil.copy2(test, target / test.name)
         return subprocess.run(
