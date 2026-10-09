@@ -35,6 +35,7 @@ in
   home.file.".aws/config".text = builtins.concatStringsSep "" [
     (mkSsoSession "default")
     (mkSsoSession "admin")
+    (mkReadOnly "Audit" "120479167671")
     (mkAccount "sandbox" "962800862825")
     (mkAccount "tip-extra" "341238550926")
     (mkAccount "booklift" "537452063997")
