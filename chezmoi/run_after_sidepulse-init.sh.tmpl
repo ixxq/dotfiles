@@ -1,0 +1,20 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+set -eu
+
+source={{ joinPath .chezmoi.sourceDir ".chezmoitemplates/sidepulse/INIT.LED" | shellQuote }}
+target='/Volumes/SidePulse/INIT.LED'
+
+if [ ! -f "$target" ]; then
+    printf 'SidePulse: not connected; INIT.LED skipped.\n'
+    exit 0
+fi
+if cmp -s "$source" "$target"; then
+    exit 0
+else
+    result=$?
+    [ "$result" -eq 1 ] || exit "$result"
+fi
+cat "$source" > "$target"
+printf 'SidePulse: INIT.LED updated.\n'
+{{ end -}}

@@ -6,11 +6,35 @@ Gitには標準版のファイルを先に登録し、その次のコミット�
 設定ファイルはMac側の`~/.config/sidepulse/agent-monitor/settings.json`にある。
 CLIはMac側で動くPythonプログラムを指す。
 
-更新日: 2026-10-02。対象はmacOS、SidePulse Pro（8 LED）、CLI `1.dev71+g6d55225fe`。
+更新日: 2026-10-09。対象はmacOS、SidePulse Pro（8 LED）、CLI `1.dev71+g6d55225fe`。
 このMacには以下の変更を適用済み。確認や記録のために、復元手順をもう一度実行する必要はない。
 青い待機パルスを10分で消灯するカスタム演出もMacへ適用済み。
 
 ## 日常操作
+
+### 本体の起動演出
+
+[INIT.LED](../chezmoi/.chezmoitemplates/sidepulse/INIT.LED)は、Codexのセッション開始と同じ約2秒の虹。中央から外側へ約1.4秒で広がり、約0.6秒で消える。2026-10-09に本体の内容が原本と一致することを確認済み。実機での起動時の見え方はまだ未確認。
+Macの設定とは別に、SidePulse本体の`/Volumes/SidePulse/INIT.LED`へ保存する。
+本体への電源投入時に再生されるほか、ファイルを書き換えた直後にも確認用に再生される（[公式仕様](https://github.com/inteliwear/sidepulse/blob/main/LEDS_FORMAT.md#initial-state)）。
+常駐処理が動いていれば、その後は通常のエージェント状態表示へ切り替わる。
+
+原本と[反映スクリプト](../chezmoi/run_after_sidepulse-init.sh.tmpl)をdotfilesで管理する。
+Macでは通常の`chezmoi apply`の最後に本体と原本を比較し、差分があるときだけ書き込む。SidePulseサービスの再起動は不要。
+未接続ならスキップし、接続後の次の`chezmoi apply`で反映する。接続だけでは反映されない。
+内容が同じなら書き込まず、演出を再生し直さない。読み書きのエラーは失敗として返す。
+`--exclude=scripts`や通常ファイルだけの個別適用では、この反映スクリプトは実行されない。
+元の紫の演出は[defaults/INIT.LED](defaults/INIT.LED)に保存している。
+
+```sh
+chezmoi apply
+```
+
+この処理だけを実行する場合は次を使う。
+
+```sh
+chezmoi apply --source-path ~/.dotfiles/chezmoi/run_after_sidepulse-init.sh.tmpl
+```
 
 ### 再起動 / ON
 
@@ -116,6 +140,8 @@ SidePulse標準のカスタム演出機能と`repeat 150`を使い、Pythonの�
 | --- | --- |
 | [chezmoiのSidePulse設定](../chezmoi/dot_config/sidepulse/agent-monitor/private_settings.json) | `~/.config/sidepulse/agent-monitor/settings.json`の現在値 |
 | [10分の待機パルス](../chezmoi/dot_config/sidepulse/agent-monitor/animations/idle-pulse-10-min.LED) | 青い待機パルスを150回繰り返して消灯するカスタム演出 |
+| [本体のINIT.LED](../chezmoi/.chezmoitemplates/sidepulse/INIT.LED) / [反映スクリプト](../chezmoi/run_after_sidepulse-init.sh.tmpl) | 本体起動時の虹と、`chezmoi apply`で差分だけ反映する処理 |
+| [defaults/INIT.LED](defaults/INIT.LED) | この本体に元から入っていた紫の起動演出 |
 | [Codex設定](../chezmoi/dot_codex/private_config.toml) | SidePulseの12イベント、`features.hooks`、このMacで承認済みのSidePulseフック状態 |
 | [Claude Code設定](../chezmoi/dot_claude/private_settings.json) | SidePulseの12イベント。元からある通知音のフックも保持 |
 | [chezmoiのPythonファイル](../chezmoi/dot_local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse) | 変更後のPythonコード6ファイル。`chezmoi apply`で実行先へ配置 |
@@ -179,6 +205,14 @@ Pythonコードはchezmoi側の6ファイルを編集し、下の検証を実行
 chezmoi側の編集は、実行先へ反映する前に検証できる。
 インストール済みコード、設定、フック、実機のLEDは書き換えない。
 macOSのSidePulse用Python環境を使用し、追加のテストライブラリは不要。
+
+本体の起動演出の自動反映は、次の独立したチェックで検証する。
+
+```sh
+python3 ~/.dotfiles/sidepulse/check_device_init.py
+```
+
+chezmoiのソース・設定・状態DBとディスクを一時ディレクトリへ分離し、未接続、差分反映、同一内容の書き込み省略、本体側の変更の修復、エラー時の内容保持を確認する。実機には書き込まない。
 
 終了時の消灯はCodexアプリとClaude Codeで実機確認済み。虹の起動演出も実機確認済み。
 終了時の消灯確認は待機表示を`immediate-off`にしていたときの記録。現在はセッション終了後も青い待機パルスになり、10分後に消灯する設定。
