@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1790859941517,
+  "lastUpdate": 1791808924616,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5078,6 +5078,65 @@ window.BENCHMARK_DATA = {
             "range": "18.61 ms",
             "unit": "ms",
             "extra": "median: 43.14 ms\nmin: 37.9 ms\nmax: 116.94 ms\nstddev: 18.61 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "662d4fadec19f651870f8241ff922153e3a7e8cc",
+          "message": "fix(nix): use lemtoc as the M4Air local username\n\n- Match the M4Air configuration to the existing lemtoc macOS account.\n- Generate Home Manager settings and signing key paths for that account.\n\nCo-authored-by: Codex GPT-5.5 <noreply@openai.com>",
+          "timestamp": "2026-10-12T21:24:58+09:00",
+          "tree_id": "1dad8dad985674b6c428548be32e91163b604045",
+          "url": "https://github.com/ixxq/dotfiles/commit/662d4fadec19f651870f8241ff922153e3a7e8cc"
+        },
+        "date": 1791808922929,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 44.93,
+            "range": "6 ms",
+            "unit": "ms",
+            "extra": "median: 44.93 ms\nmin: 43.04 ms\nmax: 69.51 ms\nstddev: 6 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 45.36,
+            "range": "6.01 ms",
+            "unit": "ms",
+            "extra": "median: 45.36 ms\nmin: 43.48 ms\nmax: 69.97 ms\nstddev: 6.01 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.84 ms\nmax: 0.89 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.25,
+            "range": "7.28 ms",
+            "unit": "ms",
+            "extra": "median: 2.25 ms\nmin: 1.42 ms\nmax: 19.22 ms\nstddev: 7.28 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 34.14,
+            "range": "0.81 ms",
+            "unit": "ms",
+            "extra": "median: 34.14 ms\nmin: 33.68 ms\nmax: 37.36 ms\nstddev: 0.81 ms\nruns: 16"
           }
         ]
       }
