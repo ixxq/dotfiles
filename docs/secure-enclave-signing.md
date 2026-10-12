@@ -30,13 +30,16 @@ Git のコミット署名鍵を macOS の Secure Enclave で管理する。1Pass
 | 項目 | 値 |
 |---|---|
 | M4Pro の signer | Secure Enclave (`hosts/M4Pro/default.nix` で共有設定を上書き) |
-| M4Air の signer | 1Password (`home/git.nix` の共有既定値) |
+| M4Air の signer | Secure Enclave (`hosts/M4Air/default.nix` で共有設定を上書き) |
 | identity label | `git-sign` |
 | private key protection | `none` (署名時の Touch ID なし) |
 | public key hash (SHA1) | `D93C59C037113F3418EAAB2E4EA5277EB34DCE1B` (現在の M4Pro の値) |
 | SSH fingerprint | `SHA256:AsbsNi30tI7r4kUqNSHew9DI86raUYeHeYP3MLCjpck` (現在の M4Pro の値) |
+| M4Air public key hash (SHA1) | `F4C41FBD5D6FB60859562D2C5619A06A59A78521` |
+| M4Air SSH fingerprint | `SHA256:1ByRGYz/aH3EATzuqXW4ILVyhuDL8VpsPzKIKeGnjmY` |
+| M4Air 証明書有効期限 | **2036/10/09** (2026/10/12 に作成し、10年に更新済み) |
 | 証明書有効期限 | **2036/08/07** (作成時は 2027/08/10 = 1年。下記手順で10年に更新済み) |
-| GitHub signing key | M4Pro: id=1103015 `Secure Enclave (M4Pro, signing)` / M4Air: id=805051 `1Password (signing)` |
+| GitHub signing key | M4Pro: id=1103015 `Secure Enclave (M4Pro, signing)` / M4Air: id=1237600 `Secure Enclave (M4Air, signing)` / 旧鍵: id=805051 `1Password (signing)` |
 | allowed signers | `home/git.nix` の `allowedSignerKeys` から生成 |
 
 `~/.ssh/allowed_signers` は Home Manager が Nix store へのシンボリックリンクとして管理する。
@@ -45,19 +48,21 @@ Git のコミット署名鍵を macOS の Secure Enclave で管理する。1Pass
 ### Git 側の設定
 
 `ssh-keygen` に `SSH_SK_PROVIDER` を渡すラッパーが要る。Git は `gpg.ssh.program` に
-環境変数を渡せないため、`hosts/M4Pro/default.nix` の `sshSign` でラッパーを生成している。
+環境変数を渡せないため、`hosts/M4Pro/default.nix` と `hosts/M4Air/default.nix` の
+`sshSign` でラッパーを生成している。
 
 `user.signingkey` は 1Password 時代のリテラル公開鍵ではなく、**ハンドルファイルのパス**
 (`~/.ssh/id_git_sign`) を指定する。sk 鍵はハンドルが無いと署名できない。
 
-この鍵は M4Pro にしか存在しないので、`home/git.nix` (全ホスト共有) に直接書くと
-**M4Air が次の rebuild でコミット不能になる**。そのため共有設定は 1Password を
-`lib.mkDefault` のまま維持し、M4Pro のホスト設定だけで鍵と signer を上書きしている。
+Secure Enclave の鍵は作成した端末にしか存在しないので、各端末で別々に作成する。
+共有設定は 1Password を `lib.mkDefault` のまま維持し、M4Pro と M4Air のホスト設定で
+それぞれ端末専用の鍵ハンドルと signer を指定している。
 
 ### Signing key のローテーション
 
-GitHub の `id=805051` `1Password (signing)` は M4Air が現在も使う**現役鍵**なので、
-M4Air を移行するまでは削除しない。GitHub は一度 Verified にしたコミットの検証記録を
+GitHub の `id=805051` `1Password (signing)` は移行前の旧鍵として残している。
+新しい鍵の GitHub 登録と署名検証が完了するまでは削除しない。
+GitHub は一度 Verified にしたコミットの検証記録を
 repository network 内で永続化するため、登録鍵を後から削除しても、その記録がある過去コミットは
 Verified のままになる。ただし削除後に初めて push するコミットや、別の repository network で
 初めて検証するコミットには登録鍵が必要になる。
@@ -178,6 +183,7 @@ SSH はこの証明書を使わない (生の公開鍵しか見ない) ので、
 変わらない**。よって GitHub 側の再登録は不要。
 
 この identity は既に10年証明書 (2036/08/07) に更新済みなので、当面この作業は不要。
+M4Air の identity も10年証明書 (2036/10/09) に更新済み。
 新しいマシンで作り直したときは、作成直後に一度この手順を通しておくとよい。
 
 期限切れ後の挙動は未確認。`man ssh-keychain` に
@@ -270,7 +276,7 @@ sc_auth list-ctk-identities -t ssh
 #    allowedSignerKeys への追記、Home Manager の反映まで実施する
 
 # 4. 新旧の GitHub signing key を確認する
-#    id=805051 は M4Air が現役利用している間は削除しない
+#    id=805051 は新しい鍵の GitHub 登録と検証が完了するまで削除しない
 gh api /user/ssh_signing_keys --jq '.[] | "\(.id)\t\(.title)"'
 ```
 
@@ -307,6 +313,9 @@ gh auth refresh -h github.com -s admin:ssh_signing_key
 このドキュメントのうち実測で確認したもの:
 
 - 新規セットアップ一式 (鍵作成 → 書き出し → GitHub/`allowed_signers` 登録 → 署名・検証)
+- M4Air の鍵作成と10年証明書への更新、Home Manager 適用後の Git コミット署名・検証
+  (2026-10-12)。M4Pro の過去コミットも検証成功。GitHub への新鍵登録と公開鍵の一致も確認済み。
+  GitHub の Verified 表示は、この鍵で署名したコミットを今後 push した際に確認する。
 - 証明書更新の全工程を本番 identity `git-sign` で実行し、以下を確認 (2026-08-10):
   - 有効期限が 2027/08/10 → 2036/08/07 に伸びた
   - public key hash / SSH fingerprint / CN が**すべて不変**
