@@ -66,7 +66,7 @@
       };
       darwinConfigurations."M4Air" = mkDarwinConfig {
         hostName = "M4Air";
-        username = "ve62ca";
+        username = "lemtoc";
       };
       formatter.${system} = pkgs.nixfmt-tree;
 
