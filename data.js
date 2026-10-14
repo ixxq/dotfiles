@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791808924616,
+  "lastUpdate": 1791951648126,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5137,6 +5137,65 @@ window.BENCHMARK_DATA = {
             "range": "0.81 ms",
             "unit": "ms",
             "extra": "median: 34.14 ms\nmin: 33.68 ms\nmax: 37.36 ms\nstddev: 0.81 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "d20b33ccbfcbcbf8b4043978c35b1d1cdf23532c",
+          "message": "chore(homebrew): add Pieto Timer cask\n\n- Add watrix811/tap to the shared trusted Homebrew taps\n- Include Pieto Timer in the managed cask list\n\nCo-authored-by: Codex GPT-6.1 Sol High <noreply@openai.com>",
+          "timestamp": "2026-10-14T13:17:06+09:00",
+          "tree_id": "f607541cbb7ac3ad9c36b97148a81242ad24fefd",
+          "url": "https://github.com/ixxq/dotfiles/commit/d20b33ccbfcbcbf8b4043978c35b1d1cdf23532c"
+        },
+        "date": 1791951647004,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 47.77,
+            "range": "2.79 ms",
+            "unit": "ms",
+            "extra": "median: 47.77 ms\nmin: 45.12 ms\nmax: 56.81 ms\nstddev: 2.79 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.13,
+            "range": "2.8 ms",
+            "unit": "ms",
+            "extra": "median: 48.13 ms\nmin: 45.5 ms\nmax: 57.31 ms\nstddev: 2.8 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.21 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.77 ms\nmax: 1.72 ms\nstddev: 0.21 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.61,
+            "range": "7.13 ms",
+            "unit": "ms",
+            "extra": "median: 2.61 ms\nmin: 0.83 ms\nmax: 20.48 ms\nstddev: 7.13 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 37.17,
+            "range": "3.2 ms",
+            "unit": "ms",
+            "extra": "median: 37.17 ms\nmin: 35.66 ms\nmax: 46.78 ms\nstddev: 3.2 ms\nruns: 16"
           }
         ]
       }
