@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791951648126,
+  "lastUpdate": 1791997150546,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5196,6 +5196,65 @@ window.BENCHMARK_DATA = {
             "range": "3.2 ms",
             "unit": "ms",
             "extra": "median: 37.17 ms\nmin: 35.66 ms\nmax: 46.78 ms\nstddev: 3.2 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "8608177b360c23bed34ee7f73b4a75d9dbb18934",
+          "message": "feat(sidepulse): repeat the device startup rainbow twice\n\n- Play the device INIT.LED rainbow for two sweeps while keeping Codex startup at one\n- Update documentation and verify working-motion timing and final darkness\n\nCo-authored-by: Codex GPT-6.1 Sol High <noreply@openai.com>",
+          "timestamp": "2026-10-15T01:58:20+09:00",
+          "tree_id": "0e05418d072968a8f1779d039ecc8ba11fc6379a",
+          "url": "https://github.com/ixxq/dotfiles/commit/8608177b360c23bed34ee7f73b4a75d9dbb18934"
+        },
+        "date": 1791997149213,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 45.71,
+            "range": "5.53 ms",
+            "unit": "ms",
+            "extra": "median: 45.71 ms\nmin: 37.3 ms\nmax: 63.35 ms\nstddev: 5.53 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 46.1,
+            "range": "5.54 ms",
+            "unit": "ms",
+            "extra": "median: 46.1 ms\nmin: 37.65 ms\nmax: 63.8 ms\nstddev: 5.54 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.9,
+            "range": "0.18 ms",
+            "unit": "ms",
+            "extra": "median: 0.9 ms\nmin: 0.84 ms\nmax: 1.6 ms\nstddev: 0.18 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 11.91,
+            "range": "6.9 ms",
+            "unit": "ms",
+            "extra": "median: 11.91 ms\nmin: 1.1 ms\nmax: 18.23 ms\nstddev: 6.9 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 35.77,
+            "range": "7.49 ms",
+            "unit": "ms",
+            "extra": "median: 35.77 ms\nmin: 34.06 ms\nmax: 65.65 ms\nstddev: 7.49 ms\nruns: 16"
           }
         ]
       }
