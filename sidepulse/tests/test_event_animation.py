@@ -49,7 +49,21 @@ class StartupCheck(unittest.TestCase):
         self.clock = self.enterContext(patch('sidepulse.event_animation.time.monotonic', return_value=100.0))
 
     def test_startup_uses_working_motion_once_and_finishes_dark(self):
-        self.assertEqual((ROOT / 'INIT.LED').read_text().strip(), rainbow_program())
+        init = (ROOT / 'INIT.LED').read_text().strip()
+        startup = rainbow_program().splitlines()
+        self.assertEqual(init.splitlines(), [*startup[:-1], 'repeat 2', startup[-1]])
+        validate_led_text(init)
+        device = SdLedWasmController(8)
+        self.assertTrue(device.parse(init, 0).ok)
+        device_frames = {ms: device.step(ms) for ms in range(0, 4101, 10)}
+        working = SdLedWasmController(8)
+        self.assertTrue(working.parse(program_for_agent_mode(AgentMode.WORKING), 0).ok)
+        for ms in range(0, 3301, 10):
+            self.assertEqual([max(color) for color in device_frames[ms]],
+                             [max(color) for color in working.step(ms)])
+        self.assertTrue(any(max(color) for color in device_frames[2500]))
+        for ms in (3700, 4100):
+            self.assertTrue(all(color == (0, 0, 0) for color in device_frames[ms]))
         for count in (2, 8):
             program = rainbow_program(count)
             validate_led_text(program)

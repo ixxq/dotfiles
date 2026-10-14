@@ -1,3 +1,4 @@
 off 320ms cosine
 0:#FF294D 760ms pulse 0ms; 1:#FF8400 760ms pulse 95ms; 2:#FFE600 760ms pulse 190ms; 3:#53FF00 760ms pulse 285ms; 4:#00FFD5 760ms pulse 380ms; 5:#009DFF 760ms pulse 475ms; 6:#713CFF 760ms pulse 570ms; 7:#ED39FF 760ms pulse 665ms
+repeat 2
 off
