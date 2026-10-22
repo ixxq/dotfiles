@@ -26,7 +26,7 @@ in
   # gh is managed by programs.gh (home/gh.nix)
   home.packages = with pkgs; [
     # Language runtimes & package managers
-    # node is provided by mise (programs.mise) — keep nodejs OUT of nix
+    # node is provided by Homebrew-managed mise — keep nodejs OUT of nix
     go
     fish
     pnpm

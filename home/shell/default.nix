@@ -5,7 +5,6 @@
     ./nova.nix
     ./zoxide.nix
     ./direnv.nix
-    ./mise.nix
     ./eza.nix
     ./fzf.nix
   ];
@@ -42,7 +41,7 @@
     GH_PAGER = "less -RFX";
     PAGER = "less -RFX";
     PINACT_KEYRING_ENABLED = "true";
-    HOMEBREW_FORBIDDEN_FORMULAE = "node npm pnpm yarn bun deno go awscli bat chezmoi direnv eza fastfetch fd fzf gh lefthook mise starship turbo zoxide claude ripgrep";
+    HOMEBREW_FORBIDDEN_FORMULAE = "node npm pnpm yarn bun deno go awscli bat chezmoi direnv eza fastfetch fd fzf gh lefthook starship turbo zoxide claude ripgrep";
     ZENO_HOME = "$HOME/.config/zeno";
   };
 }

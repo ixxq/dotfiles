@@ -33,6 +33,7 @@ in
       "kayac/tap/ecspresso"
       "ixxq/tap/muu"
       "rtk"
+      "mise"
     ];
     casks = [
       "1password@beta"
