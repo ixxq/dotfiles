@@ -11,6 +11,7 @@ let
     "manaflow-ai/cmux"
     "productdevbook/tap"
     "watrix811/tap"
+    "fif7y/tap"
   ];
   # Trusting a whole tap covers every formula and cask it provides.
   trustJson = builtins.toJSON { trustedtaps = taps; };
@@ -70,6 +71,7 @@ in
       "t3-code"
       "capsomnia"
       "watrix811/tap/pieto-timer"
+      "fif7y/tap/dimble"
     ];
   };
 
