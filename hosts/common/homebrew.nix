@@ -12,9 +12,15 @@ let
     "productdevbook/tap"
     "watrix811/tap"
     "fif7y/tap"
+    {
+      name = "yksr-melt/meltype";
+      clone_target = "https://github.com/yksr-melt/Meltype.git";
+    }
   ];
   # Trusting a whole tap covers every formula and cask it provides.
-  trustJson = builtins.toJSON { trustedtaps = taps; };
+  trustJson = builtins.toJSON {
+    trustedtaps = map (tap: if builtins.isString tap then tap else tap.name) taps;
+  };
 in
 {
   homebrew = {
@@ -72,6 +78,7 @@ in
       "capsomnia"
       "watrix811/tap/pieto-timer"
       "fif7y/tap/dimble"
+      "yksr-melt/meltype/meltype"
     ];
   };
 
