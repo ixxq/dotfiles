@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792742003100,
+  "lastUpdate": 1792753376993,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5432,6 +5432,65 @@ window.BENCHMARK_DATA = {
             "range": "3.56 ms",
             "unit": "ms",
             "extra": "median: 41.65 ms\nmin: 40.71 ms\nmax: 54.05 ms\nstddev: 3.56 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "8280d157bd54c368a6e23fc3fbcf5b0ead04ee57",
+          "message": "fix(meltype): use よく分からん for よくわからん\n\n- Replace the all-hiragana output in the chezmoi-managed user dictionary\n\nCo-authored-by: Codex GPT-6 Astra Max <noreply@openai.com>",
+          "timestamp": "2026-10-23T20:01:25+09:00",
+          "tree_id": "d88c0a04d669257f60b5760c032ab6c1fc61f721",
+          "url": "https://github.com/ixxq/dotfiles/commit/8280d157bd54c368a6e23fc3fbcf5b0ead04ee57"
+        },
+        "date": 1792753375794,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 52.67,
+            "range": "5.07 ms",
+            "unit": "ms",
+            "extra": "median: 52.67 ms\nmin: 49.14 ms\nmax: 70.3 ms\nstddev: 5.07 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 53.1,
+            "range": "5.07 ms",
+            "unit": "ms",
+            "extra": "median: 53.1 ms\nmin: 49.53 ms\nmax: 70.73 ms\nstddev: 5.07 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.86,
+            "range": "0.22 ms",
+            "unit": "ms",
+            "extra": "median: 0.86 ms\nmin: 0.81 ms\nmax: 1.76 ms\nstddev: 0.22 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 3.22,
+            "range": "7.24 ms",
+            "unit": "ms",
+            "extra": "median: 3.22 ms\nmin: 1.23 ms\nmax: 18.6 ms\nstddev: 7.24 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 43.28,
+            "range": "5.04 ms",
+            "unit": "ms",
+            "extra": "median: 43.28 ms\nmin: 40.99 ms\nmax: 55.45 ms\nstddev: 5.04 ms\nruns: 16"
           }
         ]
       }
