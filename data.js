@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792371204977,
+  "lastUpdate": 1792741269676,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5314,6 +5314,65 @@ window.BENCHMARK_DATA = {
             "range": "3.31 ms",
             "unit": "ms",
             "extra": "median: 39.55 ms\nmin: 35.51 ms\nmax: 46.59 ms\nstddev: 3.31 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "k.suzuki",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "949a6697c6a75f82f2d68185a0c97138a2739156",
+          "message": "fix(mise): update Nix-managed mise to 2026.10.17 (#14)\n\n- Update the official macOS arm64 binary and verified SHA-256 for the CA trust fix.\n- Keep the Nix pin until nixpkgs includes the fixed version.\n- Verify Nix builds, interactive zsh tool switching, and benchmark thresholds locally and in CI.\n\nCo-authored-by: Codex GPT-6 Astra Max <noreply@openai.com>",
+          "timestamp": "2026-10-23T16:40:23+09:00",
+          "tree_id": "3430b38898217f2f7d46bf329ee84f7c4f9507ed",
+          "url": "https://github.com/ixxq/dotfiles/commit/949a6697c6a75f82f2d68185a0c97138a2739156"
+        },
+        "date": 1792741267917,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 59.35,
+            "range": "3.54 ms",
+            "unit": "ms",
+            "extra": "median: 59.35 ms\nmin: 55.12 ms\nmax: 72.27 ms\nstddev: 3.54 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 59.81,
+            "range": "3.52 ms",
+            "unit": "ms",
+            "extra": "median: 59.81 ms\nmin: 55.6 ms\nmax: 72.69 ms\nstddev: 3.52 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.92,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.92 ms\nmin: 0.87 ms\nmax: 0.95 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 17.04,
+            "range": "1.77 ms",
+            "unit": "ms",
+            "extra": "median: 17.04 ms\nmin: 13.39 ms\nmax: 20.66 ms\nstddev: 1.77 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 50.32,
+            "range": "0.97 ms",
+            "unit": "ms",
+            "extra": "median: 50.32 ms\nmin: 48.91 ms\nmax: 52.84 ms\nstddev: 0.97 ms\nruns: 16"
           }
         ]
       }
