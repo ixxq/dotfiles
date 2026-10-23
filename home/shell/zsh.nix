@@ -11,6 +11,7 @@ let
   zoxideBin = lib.getExe config.programs.zoxide.package;
   fzfBin = lib.getExe config.programs.fzf.package;
   direnvBin = lib.getExe config.programs.direnv.package;
+  miseBin = lib.getExe config.programs.mise.package;
   # Keep deferred work from invoking precmd/reset-prompt/redraw. Nova owns
   # prompt refresh, and zsh-defer's default prompt hooks can trigger redraw loops.
   zshDeferIdle = "zsh-defer -m -p -r";
@@ -157,16 +158,15 @@ in
 
       # Tool integrations via cache_eval instead of enableZshIntegration.
       # enableZshIntegration = true would inject `eval "$(cmd)"` which spawns a subprocess every startup.
-      # cache_eval uses versioned Nix store and Homebrew Cellar paths as cache keys,
-      # so updating a tool regenerates its shell integration.
+      # cache_eval caches the output to disk, and nix store paths in the command string serve as
+      # automatic cache keys — when a tool is updated via `nix run .#switch`, the path changes
+      # and the cache is regenerated.
       (lib.mkOrder 900 ''
         cache_eval "${novaBin} init zsh"
         ${zshDeferIdle} cache_eval "${zoxideBin} init zsh"
         ${zshDeferIdle} cache_eval "${fzfBin} --zsh"
         ${zshDeferIdle} cache_eval "${direnvBin} hook zsh"
-        mise_bin=/opt/homebrew/bin/mise
-        ${zshDeferIdle} cache_eval "''${mise_bin:A} activate zsh"
-        unset mise_bin
+        ${zshDeferIdle} cache_eval "${miseBin} activate zsh"
         if (( $+commands[muu] )); then
           ${zshDeferIdle} cache_eval "COMPLETE=zsh muu"
         fi
