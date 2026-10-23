@@ -1,15 +1,13 @@
 { pkgs, ... }:
 let
-  miseVersion = "2026.5.12";
-  # Upstream ships precompiled binaries; building from source via
-  # rustPlatform.buildRustPackage takes 30+ minutes and is uncacheable on
-  # cache.nixos.org, so we wrap the official release tarball instead.
+  miseVersion = "2026.10.17";
+  # Use the official binary until nixpkgs includes the CA trust fix in 2026.10.17.
   miseBin = pkgs.stdenv.mkDerivation {
     pname = "mise-bin";
     version = miseVersion;
     src = pkgs.fetchurl {
       url = "https://github.com/jdx/mise/releases/download/v${miseVersion}/mise-v${miseVersion}-macos-arm64.tar.gz";
-      hash = "sha256-W4g8hooHSN0MWV0w/QAOxRON+r3u8sMCIoZuvzSvGuM=";
+      hash = "sha256-18UMFoNSSnZCYJhszJxBwN5eH81JFxS1ZAtle3Z4GvY=";
     };
     dontConfigure = true;
     dontBuild = true;
