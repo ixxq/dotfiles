@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792741269676,
+  "lastUpdate": 1792742003100,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5373,6 +5373,65 @@ window.BENCHMARK_DATA = {
             "range": "0.97 ms",
             "unit": "ms",
             "extra": "median: 50.32 ms\nmin: 48.91 ms\nmax: 52.84 ms\nstddev: 0.97 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "52c59751a2812674bdb2c9ba19ca8bd2b453ee03",
+          "message": "chore(homebrew): add Dimble cask\n\n- Add fif7y/tap to the trusted Homebrew taps.\n- Manage Dimble through the shared cask configuration.\n\nCo-authored-by: Codex GPT-6 Astra Max <noreply@openai.com>",
+          "timestamp": "2026-10-23T16:49:51+09:00",
+          "tree_id": "df4f642630232f2aa9a6920f98c0a6b367755f9d",
+          "url": "https://github.com/ixxq/dotfiles/commit/52c59751a2812674bdb2c9ba19ca8bd2b453ee03"
+        },
+        "date": 1792742001896,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 52.42,
+            "range": "4.03 ms",
+            "unit": "ms",
+            "extra": "median: 52.42 ms\nmin: 50.34 ms\nmax: 67.37 ms\nstddev: 4.03 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 52.77,
+            "range": "4.04 ms",
+            "unit": "ms",
+            "extra": "median: 52.77 ms\nmin: 50.74 ms\nmax: 67.8 ms\nstddev: 4.04 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.9,
+            "range": "0.05 ms",
+            "unit": "ms",
+            "extra": "median: 0.9 ms\nmin: 0.79 ms\nmax: 1.05 ms\nstddev: 0.05 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2,
+            "range": "6.76 ms",
+            "unit": "ms",
+            "extra": "median: 2 ms\nmin: 1.02 ms\nmax: 17.94 ms\nstddev: 6.76 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 41.65,
+            "range": "3.56 ms",
+            "unit": "ms",
+            "extra": "median: 41.65 ms\nmin: 40.71 ms\nmax: 54.05 ms\nstddev: 3.56 ms\nruns: 16"
           }
         ]
       }
