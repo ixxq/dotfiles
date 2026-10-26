@@ -9,9 +9,9 @@ Use this skill when responding to review feedback on a GitHub pull request.
 
 ## Procedure
 
-1. Resolve the repository and PR, then fetch review threads with their inline comment IDs and `isResolved`/`isOutdated` state. Prefer the thread-aware `fetch_comments.py` workflow from `github:gh-address-comments` or the GitHub connector's thread API.
+1. Resolve the repository and PR, then fetch review threads with their inline comment IDs and `isResolved`/`isOutdated` state. Prefer the thread-aware `fetch_comments.py` workflow from `github:gh-address-comments` or the GitHub connector's thread API; if neither is available, query `pullRequest.reviewThreads` via `gh api graphql`.
 2. Group only the unresolved, non-outdated actionable threads. Keep the response mapped to the exact file/line and comment that it addresses.
-3. Reply to each thread's top-level inline comment individually. Use the GitHub review-comment reply endpoint or the GitHub connector's `github_reply_to_review_comment`; do not use `gh pr comment` for the default response path.
+3. Reply to each thread's top-level inline comment individually. Use the GitHub review-comment reply endpoint or the GitHub connector's `github_reply_to_review_comment` (without a connector: `gh api repos/OWNER/REPO/pulls/PR/comments/COMMENT_ID/replies -f body=...`); do not use `gh pr comment` for the default response path.
 4. Begin every Amazon Q reply with `/q ` and every ChatGPT Codex Connector (`chatgpt-codex-connector`) reply with `@codex `. Apply any other prefix the user explicitly requests. Use Japanese when the repository or user requests Japanese review communication.
 5. Verify that every intended thread has a reply URL. Report the thread-to-reply mapping and leave unrelated, resolved, or outdated threads untouched.
 
