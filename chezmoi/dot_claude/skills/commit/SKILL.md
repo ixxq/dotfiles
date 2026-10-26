@@ -48,6 +48,8 @@ Based on the above context:
   - Insert one blank line after the summary, then write the body
   - The body **must** be written as bullet points — **never** use prose paragraphs or a single free-form line
   - Each bullet should describe a reason, context, or detail of the change
+  - Do not insert blank lines between bullet points
+  - If a trailer (e.g. `Co-Authored-By`) is appended, separate it from the last bullet with exactly one blank line
   - Example:
 
     ```
@@ -83,4 +85,5 @@ When composing a multi-line commit message with `git commit -m "$(cat <<...EOF .
 
 - Do not execute `git add`
 - The changes are already staged with the correct granularity and responsibility.
+- If unstaged changes exist, leave them untouched and mention them after the commit
 - Do not execute `git push`

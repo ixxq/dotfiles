@@ -25,6 +25,7 @@ Based on the above context:
 2. Verify prerequisites:
    - Review the **Current repository state** and **Current branch details** from context above
    - Ensure all changes are committed (no unstaged/uncommitted changes)
+   - If uncommitted changes exist, stop and ask the user, unless they explicitly said a draft/WIP PR with local changes left out is acceptable
    - Confirm the branch is appropriate for creating a PR
    - If issues are found, notify the user before proceeding
 
@@ -104,6 +105,11 @@ N/A - [brief description of the purpose]
   - **Scope language matches the title language**: for Japanese PRs the scope may be written in Japanese; for English PRs keep the scope in English
   - Example (English): `feat(auth): Add user authentication with OAuth2`
   - Example (Japanese): `feat(認証): OAuth2 ログイン機能を追加`
+
+- **Readability**:
+  - Write Changes and Verification (or equivalents like `変更内容`, `確認したこと`) at a level a PM can read and understand
+  - Keep them short and high-signal; do not overload readers with excessive detail
+  - Keep bullet lists compact — do not insert blank lines between bullet points
 
 - **Issue section**:
   - Use `fixes #<number>` to automatically close related issues
