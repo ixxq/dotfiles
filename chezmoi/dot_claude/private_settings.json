@@ -8,15 +8,13 @@
   "permissions": {
     "allow": [
       "Bash(mkdir:*)",
-      "Bash(find:*)",
-      "Bash(rg:*)",
       "Bash(git add:*)",
       "Bash(gh issue view:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr diff:*)",
       "Bash(gh run view:*)",
-      "Bash(mcp__ide__getDiagnostics)"
+      "mcp__ide__getDiagnostics"
     ],
     "deny": [
       "Bash(rm -rf ~/.*:*)"
