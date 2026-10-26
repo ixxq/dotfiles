@@ -37,14 +37,8 @@
       abbr --add gst 'git status'
       abbr --add gco 'git checkout'
       abbr --add gs 'git switch'
-      abbr --add move 'git switch'
       abbr --add mdv 'gh markdown-preview'
       abbr --add cc claude
-      abbr --add cci codex:commit
-      abbr --add ccpr codex:create-pr
-      abbr --add cs cursor
-      abbr --add warp 'open -a Warp'
-      abbr --add ghostty 'open -a Ghostty'
       abbr --add --command git sw switch
       abbr --add --command git ci commit
       abbr --add --command git push-f 'push --force-with-lease'
