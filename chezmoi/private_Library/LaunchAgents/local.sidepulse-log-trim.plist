@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>local.sidepulse-log-trim</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>-c</string>
+    <!-- ponytail: lines appended during the trim are lost; fine for logs, use a lock if sidepulse adds one -->
+    <string>cd "$HOME/.local/state/sidepulse/agent-monitor" || exit 0
+for f in *.jsonl; do
+  [ "$(stat -f%z "$f")" -gt 104857600 ] || continue
+  tail -c 52428800 "$f" | tail -n +2 > "$f.tmp" &amp;&amp; cat "$f.tmp" > "$f"
+  rm -f "$f.tmp"
+done</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>4</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+</dict>
+</plist>
