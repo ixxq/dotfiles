@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792753376993,
+  "lastUpdate": 1792997093627,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5491,6 +5491,65 @@ window.BENCHMARK_DATA = {
             "range": "5.04 ms",
             "unit": "ms",
             "extra": "median: 43.28 ms\nmin: 40.99 ms\nmax: 55.45 ms\nstddev: 5.04 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "63fe64904b1ab5ae0bfa1993dee9413b0929b1f7",
+          "message": "chore(sidepulse): trim agent-monitor logs daily\n\n- add a LaunchAgent that keeps the newest ~50MB of each jsonl over 100MB at 04:00\n- truncate in place so sidepulse's per-write append handles keep working\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-26T15:44:09+09:00",
+          "tree_id": "1f5d0457ffba05a0c884964c3d08d5e2924c2f8f",
+          "url": "https://github.com/ixxq/dotfiles/commit/63fe64904b1ab5ae0bfa1993dee9413b0929b1f7"
+        },
+        "date": 1792997092457,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 50.27,
+            "range": "5.76 ms",
+            "unit": "ms",
+            "extra": "median: 50.27 ms\nmin: 48.39 ms\nmax: 72.21 ms\nstddev: 5.76 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 50.74,
+            "range": "5.78 ms",
+            "unit": "ms",
+            "extra": "median: 50.74 ms\nmin: 48.89 ms\nmax: 72.77 ms\nstddev: 5.78 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.89,
+            "range": "0.03 ms",
+            "unit": "ms",
+            "extra": "median: 0.89 ms\nmin: 0.8 ms\nmax: 0.94 ms\nstddev: 0.03 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.85,
+            "range": "6.58 ms",
+            "unit": "ms",
+            "extra": "median: 2.85 ms\nmin: 0.8 ms\nmax: 19.63 ms\nstddev: 6.58 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 40.26,
+            "range": "2.27 ms",
+            "unit": "ms",
+            "extra": "median: 40.26 ms\nmin: 39.88 ms\nmax: 49.54 ms\nstddev: 2.27 ms\nruns: 16"
           }
         ]
       }
