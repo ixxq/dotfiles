@@ -133,6 +133,11 @@ N/A - [brief description of the purpose]
   - Add context that helps reviewers understand the approach
   - Mention any trade-offs or alternatives considered
 
+- **Frontend screenshots**:
+  - If the PR changes frontend code, include screenshots of the affected screens captured from the running app, even when the appearance is unchanged
+  - Put `![<verified screen>](./screenshot.png)` references in the template's screenshot section (add one if missing), pass the body with `--body-file`, and upload with `gh pr create --attach ./screenshot.png` (or `gh pr edit <number> --attach`; repeat per file). `gh` rewrites the references to uploaded asset URLs
+  - Verify the screenshots render in the PR body. If capture or upload is blocked, report it and do not mark the PR ready for review
+
 - **Verification in repository templates**:
   - If the repository's PR template has a verification/confirmation section (e.g., "確認したこと", "Verification", "Checklist"), apply the same rules as the Verification section above
   - Do not list CI-verified items — only include manual verification steps reviewers should confirm

@@ -37,6 +37,7 @@ description: Create a GitHub pull request using the gh CLI. Use when the user wa
 - In verification/checklist sections, do not list CI-only checks such as lint, typecheck, or tests unless the reviewer must manually verify them.
 - Keep verification items unchecked and phrased as reviewer acceptance criteria.
 - Include implementation notes only when they help reviewers understand the approach or trade-offs.
+- If the PR changes frontend code, include screenshots of the affected screens captured from the running app, even when the appearance is unchanged. Put `![<verified screen>](./screenshot.png)` references in the template's screenshot section (add one if missing), pass the body with `--body-file`, and upload with `gh pr create --attach ./screenshot.png` (or `gh pr edit <number> --attach`; repeat per file). `gh` rewrites the references to uploaded asset URLs. Verify they render; if capture or upload is blocked, report it and do not mark the PR ready for review.
 - Include this comment at the top of the PR body unless the user asks otherwise:
 
 ```markdown

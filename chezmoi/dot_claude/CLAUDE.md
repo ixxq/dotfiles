@@ -8,6 +8,8 @@
   - In many cases, type detection is `typecheck`, and linting is `lint` or `lint-types`.
   - If both `lint` and `lint-types` exist, please run only `lint-types`.
 - Never consider a task complete until all diagnostic errors are resolved.
+- In Issue drafting and design as well as implementation, avoid speculative abstractions, configuration, or follow-up work (including extra Issues) beyond confirmed current requirements.
+- Do not run state-changing dev/prod operations (POST, PUT, PATCH, DELETE, or equivalent) just to verify a change unless the user explicitly authorizes that exact action. Ask the user for such checks and any you cannot perform, and state precisely what remains for them to verify and why.
 - When creating a pull request, please check if there is a PR template in the repository and follow it if available.
 - Use `rg` (ripgrep) instead of `grep` for text search. `rg` is faster, honors `.gitignore` by default, and is already permitted without prompts. Reserve `grep` only for piping short command output (e.g. `ps aux | grep foo`) where `rg` would be awkward.
 - Prefer the built-in `LSP` tool for symbol-level work: jumping to a definition, finding references, inspecting types/signatures via hover, or listing symbols in a file or workspace. Use it instead of `rg`/`find` whenever the target is a named symbol (function, class, variable, type), because LSP returns semantic results rather than text matches and is dramatically faster on large codebases.

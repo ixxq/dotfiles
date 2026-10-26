@@ -1,7 +1,3 @@
-## Orchestration
-
-- For Issue drafting, design, implementation, review, merging, or deployment, use `$orchestrator` throughout the task unless a more specific repository orchestrator applies.
-
 ## Tool use
 
 - In Code Mode, within each bounded stage, run independent, functions.exec-available tool calls concurrently in one functions.exec call. Use `await Promise.allSettled([...])` when partial results are useful, and inspect every result; use `await Promise.all([...])` only when any failure should abort the batch. Keep dependencies, waits/resumes, approvals, conflicting or interdependent mutations, and adaptive investigations sequential.
@@ -13,13 +9,14 @@
 - Avoid `any` and minimize type assertions with `as`.
 - Prefer non-destructive operations for arrays and objects.
 - Prefer `const` over `let` unless reassignment is required.
-- Avoid speculative abstractions, configuration options, or generalization beyond what the current task requires. Prefer the simplest solution that satisfies the stated requirement over one that anticipates hypothetical future needs.
+- In Issue drafting and design as well as implementation, avoid speculative abstractions, configuration options, follow-up Issues, or generalization beyond what the current task requires. Prefer the simplest solution that satisfies the stated requirement over one that anticipates hypothetical future needs.
 - Fix the root cause, not the symptom. Avoid workarounds such as suppressing errors, catching and ignoring exceptions, or hardcoding special cases to make a failure disappear without resolving the underlying issue.
 
 ## Verification
 
 - Before completing a task, inspect `package.json`, find and run the repository's typecheck and lint commands, and resolve all reported type, lint, and diagnostic errors.
 - If both `lint` and `lint-types` exist, run only `lint-types`.
+- Do not run state-changing dev/prod operations (POST, PUT, PATCH, DELETE, or equivalent) just to verify a change unless the user explicitly authorizes that exact action. Ask the user for such checks and any you cannot perform, and state precisely what remains for them to verify and why.
 
 ## Pull requests
 
