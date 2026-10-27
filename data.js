@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793073607648,
+  "lastUpdate": 1793092853931,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5609,6 +5609,65 @@ window.BENCHMARK_DATA = {
             "range": "2.33 ms",
             "unit": "ms",
             "extra": "median: 41.92 ms\nmin: 39.13 ms\nmax: 48.63 ms\nstddev: 2.33 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "d366eabc3277576f9dd678fe7086f9bee8e92cfa",
+          "message": "chore(claude): require advisor calls on multi-step tasks\n\n- the advisor was enabled in 9 sessions today but never called unprompted\n- call it after orientation and before declaring completion\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-27T18:13:22+09:00",
+          "tree_id": "76a871e7db1f309b67d0d4e915b0a8cea8d222d1",
+          "url": "https://github.com/ixxq/dotfiles/commit/d366eabc3277576f9dd678fe7086f9bee8e92cfa"
+        },
+        "date": 1793092852796,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 50.29,
+            "range": "4.06 ms",
+            "unit": "ms",
+            "extra": "median: 50.29 ms\nmin: 49.03 ms\nmax: 66.7 ms\nstddev: 4.06 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 50.74,
+            "range": "4.06 ms",
+            "unit": "ms",
+            "extra": "median: 50.74 ms\nmin: 49.52 ms\nmax: 67.17 ms\nstddev: 4.06 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.9,
+            "range": "0.03 ms",
+            "unit": "ms",
+            "extra": "median: 0.9 ms\nmin: 0.84 ms\nmax: 0.94 ms\nstddev: 0.03 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 15.64,
+            "range": "7.19 ms",
+            "unit": "ms",
+            "extra": "median: 15.64 ms\nmin: 1.37 ms\nmax: 18.46 ms\nstddev: 7.19 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 40.38,
+            "range": "0.56 ms",
+            "unit": "ms",
+            "extra": "median: 40.38 ms\nmin: 39.65 ms\nmax: 41.85 ms\nstddev: 0.56 ms\nruns: 16"
           }
         ]
       }
