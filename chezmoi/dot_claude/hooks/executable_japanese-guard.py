@@ -43,6 +43,8 @@ WAIT_SECONDS = float(os.environ.get("JAPANESE_GUARD_WAIT", "3"))
 JA = re.compile(r"[ぁ-んァ-ヶ一-龥]")
 LATIN = re.compile(r"[A-Za-z]")
 IGNORE = [
+    # 本文の text ブロックに、サブエージェントの報告などがシステム通知として混ざって記録されることがある
+    re.compile(r"<system-reminder>.*?</system-reminder>", re.S),
     re.compile(r"```.*?```", re.S),
     re.compile(r"`[^`\n]*`"),
     re.compile(r"https?://\S+"),
@@ -157,9 +159,11 @@ def wait_for_final(transcript_path, timeout=WAIT_SECONDS):
 def english_passages(transcript_path, entries=None):
     if entries is None:
         entries = read_entries(transcript_path)
+    # ターンの始まり。ユーザーの発言に加え、前のターンの終わり（turn_duration）でも区切る。
+    # サブエージェントの報告で始まるターンはユーザーの発言を挟まないため、区切らないと前のターンの本文を判定し直してしまう
     start = 0
     for i, entry in enumerate(entries):
-        if is_user_turn(entry):
+        if is_user_turn(entry) or (entry.get("type") == "system" and entry.get("subtype") == "turn_duration"):
             start = i + 1
     # 最終回答＝最後のツール呼び出しより後の本文。ツール呼び出しが出るたびに集め直す
     final = []
