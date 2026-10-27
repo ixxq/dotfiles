@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792997093627,
+  "lastUpdate": 1793073607648,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5550,6 +5550,65 @@ window.BENCHMARK_DATA = {
             "range": "2.27 ms",
             "unit": "ms",
             "extra": "median: 40.26 ms\nmin: 39.88 ms\nmax: 49.54 ms\nstddev: 2.27 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "8f81444c4c190d3d1d10ee99bf721c163646642d",
+          "message": "chore(claude): add japanese-guard hook\n\n- add japanese-guard.py from minorun365/claude-code-japanese-guard\n- register it as a Stop hook to send English replies back for a Japanese rewrite\n- register it as a PreToolUse hook on `mcp__.*__wrap_up` to block English wrap-up boxes\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-27T11:06:01+09:00",
+          "tree_id": "afb09ea9207a3fe7481df5bd01db8022794c9aca",
+          "url": "https://github.com/ixxq/dotfiles/commit/8f81444c4c190d3d1d10ee99bf721c163646642d"
+        },
+        "date": 1793073606383,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 51.92,
+            "range": "6.41 ms",
+            "unit": "ms",
+            "extra": "median: 51.92 ms\nmin: 48.47 ms\nmax: 76.92 ms\nstddev: 6.41 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 52.36,
+            "range": "6.41 ms",
+            "unit": "ms",
+            "extra": "median: 52.36 ms\nmin: 48.93 ms\nmax: 77.37 ms\nstddev: 6.41 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.9,
+            "range": "0.05 ms",
+            "unit": "ms",
+            "extra": "median: 0.9 ms\nmin: 0.83 ms\nmax: 1 ms\nstddev: 0.05 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 3.16,
+            "range": "6.63 ms",
+            "unit": "ms",
+            "extra": "median: 3.16 ms\nmin: 1.19 ms\nmax: 17.16 ms\nstddev: 6.63 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 41.92,
+            "range": "2.33 ms",
+            "unit": "ms",
+            "extra": "median: 41.92 ms\nmin: 39.13 ms\nmax: 48.63 ms\nstddev: 2.33 ms\nruns: 16"
           }
         ]
       }
