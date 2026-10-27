@@ -21,5 +21,3 @@
 ## Pull requests
 
 - Before creating a pull request, check for and follow any repository PR template.
-
-@/Users/t1190078/.codex/RTK.md

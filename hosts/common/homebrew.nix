@@ -39,7 +39,6 @@ in
       "k1low/tap/mo"
       "kayac/tap/ecspresso"
       "ixxq/tap/muu"
-      "rtk"
     ];
     casks = [
       "1password@beta"
