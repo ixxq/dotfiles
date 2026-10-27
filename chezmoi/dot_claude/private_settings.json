@@ -46,6 +46,14 @@
             "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/japanese-guard.py"
+          }
+        ]
       }
     ],
     "Notification": [
@@ -97,6 +105,15 @@
           {
             "type": "command",
             "command": "/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider claude --log /Users/t1190078/.local/state/sidepulse/agent-monitor/claude.jsonl ; true"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*__wrap_up",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/japanese-guard.py"
           }
         ]
       }
