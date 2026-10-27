@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793092853931,
+  "lastUpdate": 1793094050009,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5668,6 +5668,65 @@ window.BENCHMARK_DATA = {
             "range": "0.56 ms",
             "unit": "ms",
             "extra": "median: 40.38 ms\nmin: 39.65 ms\nmax: 41.85 ms\nstddev: 0.56 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "3516ac102683fe7b0413b2f515222a7bdc1f4142",
+          "message": "fix(claude): stop japanese-guard from flagging text it should skip\n\n- ignore `<system-reminder>` blocks, which can carry English subagent reports inside an assistant text block\n- also start a turn after `turn_duration`, so turns begun by a subagent report do not re-check the previous turn\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-27T18:39:35+09:00",
+          "tree_id": "eee539b091567af010d9a084f865a4bccf004d64",
+          "url": "https://github.com/ixxq/dotfiles/commit/3516ac102683fe7b0413b2f515222a7bdc1f4142"
+        },
+        "date": 1793094048914,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 50.98,
+            "range": "5.59 ms",
+            "unit": "ms",
+            "extra": "median: 50.98 ms\nmin: 46.75 ms\nmax: 71.26 ms\nstddev: 5.59 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 51.42,
+            "range": "5.58 ms",
+            "unit": "ms",
+            "extra": "median: 51.42 ms\nmin: 47.12 ms\nmax: 71.7 ms\nstddev: 5.58 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.91,
+            "range": "0.13 ms",
+            "unit": "ms",
+            "extra": "median: 0.91 ms\nmin: 0.8 ms\nmax: 1.36 ms\nstddev: 0.13 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.45,
+            "range": "6.83 ms",
+            "unit": "ms",
+            "extra": "median: 2.45 ms\nmin: 0.99 ms\nmax: 18.47 ms\nstddev: 6.83 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 40.85,
+            "range": "3.32 ms",
+            "unit": "ms",
+            "extra": "median: 40.85 ms\nmin: 39.69 ms\nmax: 49.36 ms\nstddev: 3.32 ms\nruns: 16"
           }
         ]
       }
