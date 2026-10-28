@@ -239,7 +239,7 @@
     "claude-image-view": {
       "source": {
         "source": "github",
-        "repo": "jarrodwatts/claude-image-view"
+        "repo": "ixxq/claude-image-view"
       }
     }
   },
