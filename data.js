@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793094050009,
+  "lastUpdate": 1793157265209,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5727,6 +5727,65 @@ window.BENCHMARK_DATA = {
             "range": "3.32 ms",
             "unit": "ms",
             "extra": "median: 40.85 ms\nmin: 39.69 ms\nmax: 49.36 ms\nstddev: 3.32 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "417fd2f9486df81f1a5a03267f74b387a007d34e",
+          "message": "chore(claude): manage keybindings with chezmoi\n\n- bind cmd+s to chat:stash and cmd+z to chat:undo\n- rely on the Kitty keyboard protocol so Orca and cmux forward Cmd\n- keep the existing Orca agent view binding\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-28T12:12:49+09:00",
+          "tree_id": "74408acff97219bfa29a18f7ee6a21657dae01a5",
+          "url": "https://github.com/ixxq/dotfiles/commit/417fd2f9486df81f1a5a03267f74b387a007d34e"
+        },
+        "date": 1793157263884,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 50.4,
+            "range": "5.4 ms",
+            "unit": "ms",
+            "extra": "median: 50.4 ms\nmin: 49.26 ms\nmax: 72.5 ms\nstddev: 5.4 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 50.79,
+            "range": "5.46 ms",
+            "unit": "ms",
+            "extra": "median: 50.79 ms\nmin: 49.67 ms\nmax: 72.95 ms\nstddev: 5.46 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.9,
+            "range": "0.03 ms",
+            "unit": "ms",
+            "extra": "median: 0.9 ms\nmin: 0.84 ms\nmax: 0.97 ms\nstddev: 0.03 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.04,
+            "range": "6.44 ms",
+            "unit": "ms",
+            "extra": "median: 2.04 ms\nmin: 0.91 ms\nmax: 17.25 ms\nstddev: 6.44 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 41.48,
+            "range": "0.92 ms",
+            "unit": "ms",
+            "extra": "median: 41.48 ms\nmin: 40.4 ms\nmax: 44.15 ms\nstddev: 0.92 ms\nruns: 16"
           }
         ]
       }
