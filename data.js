@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793169870571,
+  "lastUpdate": 1793197086575,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5845,6 +5845,65 @@ window.BENCHMARK_DATA = {
             "range": "16.75 ms",
             "unit": "ms",
             "extra": "median: 49.09 ms\nmin: 43.59 ms\nmax: 112.87 ms\nstddev: 16.75 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "9146f08c32da900912b1ea293e5e27ecb8aa2187",
+          "message": "test(claude): review-reply-guard の動作確認スクリプトを追加\n\n- Bash（-f body、--input FILE、--input - heredoc、改行付き prefix）と MCP 返信の allow/deny を 16 ケースで検査する\n- ~/.claude/hooks に反映済みの実体を対象にし、1 件でも期待と違えば exit 1 で終了する\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-10-28T23:10:48+09:00",
+          "tree_id": "a9d403f00d9e127304130fd987ff7ed9b6d2802c",
+          "url": "https://github.com/ixxq/dotfiles/commit/9146f08c32da900912b1ea293e5e27ecb8aa2187"
+        },
+        "date": 1793197085135,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 51.13,
+            "range": "5.63 ms",
+            "unit": "ms",
+            "extra": "median: 51.13 ms\nmin: 49.09 ms\nmax: 72.7 ms\nstddev: 5.63 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 51.52,
+            "range": "5.64 ms",
+            "unit": "ms",
+            "extra": "median: 51.52 ms\nmin: 49.45 ms\nmax: 73.11 ms\nstddev: 5.64 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.03 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.81 ms\nmax: 0.93 ms\nstddev: 0.03 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.38,
+            "range": "5.44 ms",
+            "unit": "ms",
+            "extra": "median: 2.38 ms\nmin: 1.26 ms\nmax: 18.17 ms\nstddev: 5.44 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 40.51,
+            "range": "2.19 ms",
+            "unit": "ms",
+            "extra": "median: 40.51 ms\nmin: 39.75 ms\nmax: 49.11 ms\nstddev: 2.19 ms\nruns: 16"
           }
         ]
       }
