@@ -68,7 +68,7 @@ in
       pull.ff = "only";
       push.autoSetupRemote = true;
       wt = {
-        basedir = "../{gitroot}-worktrees";
+        basedir = "${config.home.homeDirectory}/dev/worktrees/{gitroot}";
         copyignored = true;
         copyuntracked = true;
         copymodified = true;
