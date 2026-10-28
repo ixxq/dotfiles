@@ -11,7 +11,7 @@ Use this skill when responding to review feedback on a GitHub pull request.
 
 1. Resolve the repository and PR, then fetch review threads with `gh api graphql` (query below). It returns the thread node `id` (needed to resolve), `isResolved`/`isOutdated`, and each comment's `databaseId`, author, and timestamp.
 2. Group only the unresolved, non-outdated actionable threads. Keep the response mapped to the exact file/line and comment that it addresses.
-3. Reply to each thread's top-level inline comment individually. Use the GitHub review-comment reply endpoint or the GitHub connector's `github_reply_to_review_comment` (without a connector: `gh api repos/OWNER/REPO/pulls/PR/comments/COMMENT_ID/replies -f body=...`); do not use `gh pr comment` for the default response path.
+3. Reply to each thread's top-level inline comment individually. Use the GitHub review-comment reply endpoint or the GitHub connector's `github_reply_to_review_comment` (without a connector: `gh api repos/OWNER/REPO/pulls/PR/comments/COMMENT_ID/replies -f body=... --jq '{url: .html_url, created_at}'`); do not use `gh pr comment` for the default response path. Keep each reply's `created_at` from the response: the Follow-up loop compares against it.
 4. Begin every reply with the reviewer prefix from the table below. Apply any other prefix the user explicitly requests. Use Japanese when the repository or user requests Japanese review communication.
 5. Verify that every intended thread has a reply URL, then continue with the Follow-up loop. Leave unrelated, resolved, or outdated threads untouched.
 
@@ -43,7 +43,7 @@ GraphQL returns bot logins without the `[bot]` suffix (e.g. `amazon-q-developer`
 
 Run this by default after replying. One round:
 
-1. **Wait.** In a background loop with an exit condition (not a long-running monitor), re-run the query every 30 seconds until every awaited thread's last comment is from the reviewer bot and newer than your reply, or 30 minutes pass. Notify once when the loop exits.
+1. **Wait.** In a background loop with an exit condition (not a long-running monitor), run the query immediately and then every 30 seconds until every awaited thread's last comment is from the reviewer bot and its `createdAt` is later than that reply's `created_at` (the value returned when you posted it), or 30 minutes pass. Never use a guessed or current time as the cutoff: the bot often answers within seconds, before the loop starts, and a cutoff later than its answer never matches. Notify once when the loop exits.
 2. **Classify** each awaited thread by the reviewer's response:
    - **Withdrawn or accepted** → resolve it: `gh api graphql -F id=THREAD_ID -f query='mutation($id:ID!){resolveReviewThread(input:{threadId:$id}){thread{isResolved}}}'`.
    - **Maintained or new concern** → assess it yourself:
