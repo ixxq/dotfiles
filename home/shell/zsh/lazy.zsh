@@ -113,3 +113,16 @@ if (( ${+commands[git-wt]} )); then
   source "$git_wt_cache"
   unset git_wt_cache
 fi
+
+# Orca のコマンド付きターミナル（Setup など）では __orca_prompt_mark が add-zle-hook-widget の
+# ディスパッチャから呼ばれ、さらに直前の zle-line-init としてディスパッチャを呼び返して循環する
+# （_zsh_autosuggest_widget_modify の FUNCNEST エラー）。呼び返し先を空にして1周で止める
+if [[ $TERM_PROGRAM == Orca ]]; then
+  _orca_break_line_init_loop() {
+    [[ ${__orca_prev_line_init_fn-} == azhw:zle-line-init ]] || return 0
+    local -a hooks
+    zstyle -a zle-line-init widgets hooks
+    (( ${hooks[(I)*:user:__orca_prompt_mark]} )) && __orca_prev_line_init_fn=
+  }
+  precmd_functions+=(_orca_break_line_init_loop)
+fi
