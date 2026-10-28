@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793157265209,
+  "lastUpdate": 1793169870571,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5786,6 +5786,65 @@ window.BENCHMARK_DATA = {
             "range": "0.92 ms",
             "unit": "ms",
             "extra": "median: 41.48 ms\nmin: 40.4 ms\nmax: 44.15 ms\nstddev: 0.92 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "f030612cd64b6eafca84b1ec2946a70bb678f841",
+          "message": "chore(claude): add follow-up loop to review thread reply skill\n\n- wait for the reviewer bot after replying and resolve withdrawn threads\n- self-assess maintained concerns: fix and reply, explain, or escalate\n- consult `advisor` once before asking the user on undecidable cases\n- fetch threads via GraphQL `reviewThreads` to get thread IDs for resolve\n- scope guardrails so resolve and code changes follow the loop's rules\n- cap the loop at 3 rounds to avoid endless bot ping-pong\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-28T15:31:11+09:00",
+          "tree_id": "fd5d30338f69e3a72c84471d24927c504d609ee0",
+          "url": "https://github.com/ixxq/dotfiles/commit/f030612cd64b6eafca84b1ec2946a70bb678f841"
+        },
+        "date": 1793169869079,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 51.63,
+            "range": "14.13 ms",
+            "unit": "ms",
+            "extra": "median: 51.63 ms\nmin: 46.82 ms\nmax: 94.16 ms\nstddev: 14.13 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 52.1,
+            "range": "14.13 ms",
+            "unit": "ms",
+            "extra": "median: 52.1 ms\nmin: 47.26 ms\nmax: 94.63 ms\nstddev: 14.13 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.93,
+            "range": "0.16 ms",
+            "unit": "ms",
+            "extra": "median: 0.93 ms\nmin: 0.85 ms\nmax: 1.47 ms\nstddev: 0.16 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.74,
+            "range": "5.91 ms",
+            "unit": "ms",
+            "extra": "median: 2.74 ms\nmin: 1.3 ms\nmax: 18.11 ms\nstddev: 5.91 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 49.09,
+            "range": "16.75 ms",
+            "unit": "ms",
+            "extra": "median: 49.09 ms\nmin: 43.59 ms\nmax: 112.87 ms\nstddev: 16.75 ms\nruns: 16"
           }
         ]
       }
