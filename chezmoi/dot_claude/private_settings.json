@@ -2,7 +2,9 @@
   "cleanupPeriodDays": 365,
   "env": {
     "CLAUDE_CODE_NO_FLICKER": "1",
-    "ENABLE_LSP_TOOL": "1"
+    "ENABLE_LSP_TOOL": "1",
+    "CLAUDE_CODE_FORCE_TERMINAL_IMAGES": "1",
+    "SHOW_YOUR_WORK_TELEMETRY": "0"
   },
   "permissions": {
     "allow": [
@@ -216,13 +218,28 @@
     "hono-skill@hono-skill": true,
     "swift-lsp@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
-    "ponytail@ponytail": true
+    "ponytail@ponytail": true,
+    "show-your-work@iamumeransari": true,
+    "image-view@claude-image-view": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
       "source": {
         "source": "github",
         "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "iamumeransari": {
+      "source": {
+        "source": "github",
+        "repo": "iamumeransari/claude-show-your-work",
+        "ref": "releases"
+      }
+    },
+    "claude-image-view": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-image-view"
       }
     }
   },
