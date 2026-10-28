@@ -29,6 +29,14 @@ in
     key: "${userEmail} ${key}\n"
   ) allowedSignerKeys;
 
+  # Orca のワークツリー setup フック。各リポジトリの orca.yaml（グローバル ignore）から呼ぶ。
+  # Orca は orca.yaml を新しいワークツリー側から読むため、.worktreeinclude（これもグローバル ignore）に
+  # orca.yaml を書いて運ばせる
+  home.file.".local/bin/orca-wt-setup" = {
+    source = ./orca-wt-setup.sh;
+    executable = true;
+  };
+
   programs.git = {
     enable = true;
     package = pkgs.git.overrideAttrs (oldAttrs: {
@@ -94,6 +102,8 @@ in
       "**/.envrc"
       "**/.playwright-mcp/"
       "**/mise.local.toml"
+      "orca.yaml"
+      ".worktreeinclude"
     ];
   };
 }

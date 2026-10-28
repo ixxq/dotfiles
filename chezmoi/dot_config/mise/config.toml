@@ -49,6 +49,15 @@ run = '''aws ec2 describe-instances --profile dpca-ide --region ap-northeast-1 -
 description = "Stop the dpca-ide EC2 instance"
 run = 'aws ec2 stop-instances --instance-ids "$(cat "$HOME/.config/dpca/instance-id")" --profile dpca-ide --region ap-northeast-1'
 
+[tasks."orca:init"]
+description = "Place orca.yaml + .worktreeinclude so Orca worktrees run orca-wt-setup"
+dir = "{{cwd}}"
+run = '''
+cd "$(git rev-parse --show-toplevel)"
+[ -e orca.yaml ] || printf 'scripts:\n  setup: "$HOME/.local/bin/orca-wt-setup"\n' > orca.yaml
+grep -qx orca.yaml .worktreeinclude 2>/dev/null || echo orca.yaml >> .worktreeinclude
+'''
+
 [tools]
 bun = "latest"
 "github:ixxq/awsctx" = "latest"
