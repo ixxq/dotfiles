@@ -1,4 +1,4 @@
 interface:
   display_name: "GitHub Review Thread Reply"
-  short_description: "Reply to PR review threads one by one"
-  default_prompt: "Use $github-review-thread-reply to reply to each GitHub pull request review thread individually."
+  short_description: "Reply to PR review threads, follow up, and resolve"
+  default_prompt: "Use $github-review-thread-reply to reply to each GitHub pull request review thread individually, then follow up until each thread is resolved or needs a decision."
