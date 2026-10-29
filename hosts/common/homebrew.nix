@@ -78,6 +78,7 @@ in
       "watrix811/tap/pieto-timer"
       "fif7y/tap/dimble"
       "yksr-melt/meltype/meltype"
+      "lunar"
     ];
   };
 
