@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793197086575,
+  "lastUpdate": 1793248548672,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -5904,6 +5904,65 @@ window.BENCHMARK_DATA = {
             "range": "2.19 ms",
             "unit": "ms",
             "extra": "median: 40.51 ms\nmin: 39.75 ms\nmax: 49.11 ms\nstddev: 2.19 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "939fd0a1b0e1421598b30944f489143099eec736",
+          "message": "chore(nix): flake inputs を更新\n\n- 更新した input: home-manager, nix-darwin, nixpkgs\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-10-29T13:34:50+09:00",
+          "tree_id": "6971566ac58e851de97b4f2e88001be63453787f",
+          "url": "https://github.com/ixxq/dotfiles/commit/939fd0a1b0e1421598b30944f489143099eec736"
+        },
+        "date": 1793248547420,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 49.09,
+            "range": "5.78 ms",
+            "unit": "ms",
+            "extra": "median: 49.09 ms\nmin: 42.31 ms\nmax: 70.51 ms\nstddev: 5.78 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 49.46,
+            "range": "5.76 ms",
+            "unit": "ms",
+            "extra": "median: 49.46 ms\nmin: 42.71 ms\nmax: 70.84 ms\nstddev: 5.76 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.87,
+            "range": "0.05 ms",
+            "unit": "ms",
+            "extra": "median: 0.87 ms\nmin: 0.81 ms\nmax: 0.99 ms\nstddev: 0.05 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 14.74,
+            "range": "6.45 ms",
+            "unit": "ms",
+            "extra": "median: 14.74 ms\nmin: 1.26 ms\nmax: 19.55 ms\nstddev: 6.45 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 38.44,
+            "range": "2.76 ms",
+            "unit": "ms",
+            "extra": "median: 38.44 ms\nmin: 37.02 ms\nmax: 45.94 ms\nstddev: 2.76 ms\nruns: 16"
           }
         ]
       }
