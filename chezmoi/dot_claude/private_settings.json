@@ -220,7 +220,8 @@
     "figma@claude-plugins-official": true,
     "ponytail@ponytail": true,
     "show-your-work@iamumeransari": true,
-    "image-view@claude-image-view": true
+    "image-view@claude-image-view": true,
+    "yomiyasu@yomiyasu": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -240,6 +241,12 @@
       "source": {
         "source": "github",
         "repo": "ixxq/claude-image-view"
+      }
+    },
+    "yomiyasu": {
+      "source": {
+        "source": "github",
+        "repo": "nanaism/yomiyasu"
       }
     }
   },
