@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793315760301,
+  "lastUpdate": 1793347319250,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -6022,6 +6022,65 @@ window.BENCHMARK_DATA = {
             "range": "3.17 ms",
             "unit": "ms",
             "extra": "median: 39.89 ms\nmin: 36.75 ms\nmax: 50.69 ms\nstddev: 3.17 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "160ce43a51f5c76729078d03944cac2b2a731d50",
+          "message": "feat(claude): handoff skill で Issue を紐づけて worktree を作る\n\n- 引数がなければ会話中の Issue を渡し、決まらなければ尋ねる手順を足す\n- `orca worktree create` に `--repo` と `--issue` / `--pr` / `--reference` を付けて紐づける\n- ブランチ名と作成元は Orca の既定に任せ、指定されたときだけ `--branch` / `--base-branch` を付ける\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-30T16:57:31+09:00",
+          "tree_id": "0baec5e233cbc93c6cf31b6c842312437628d1f7",
+          "url": "https://github.com/ixxq/dotfiles/commit/160ce43a51f5c76729078d03944cac2b2a731d50"
+        },
+        "date": 1793347318005,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 48.36,
+            "range": "6.2 ms",
+            "unit": "ms",
+            "extra": "median: 48.36 ms\nmin: 44 ms\nmax: 72.56 ms\nstddev: 6.2 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.75,
+            "range": "6.23 ms",
+            "unit": "ms",
+            "extra": "median: 48.75 ms\nmin: 44.38 ms\nmax: 73.04 ms\nstddev: 6.23 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.92,
+            "range": "0.15 ms",
+            "unit": "ms",
+            "extra": "median: 0.92 ms\nmin: 0.85 ms\nmax: 1.53 ms\nstddev: 0.15 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 3.27,
+            "range": "7.69 ms",
+            "unit": "ms",
+            "extra": "median: 3.27 ms\nmin: 1.16 ms\nmax: 22.05 ms\nstddev: 7.69 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 39.98,
+            "range": "2.24 ms",
+            "unit": "ms",
+            "extra": "median: 39.98 ms\nmin: 38.1 ms\nmax: 45.1 ms\nstddev: 2.24 ms\nruns: 16"
           }
         ]
       }
