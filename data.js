@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793366419146,
+  "lastUpdate": 1793367238242,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -6199,6 +6199,65 @@ window.BENCHMARK_DATA = {
             "range": "4.93 ms",
             "unit": "ms",
             "extra": "median: 43.14 ms\nmin: 37.66 ms\nmax: 58.76 ms\nstddev: 4.93 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "bce6d447bcf3e794c2e920fa551de01800f988ba",
+          "message": "fix(zsh): cmux で Downloads ガードが上書きされないようにする\n\n- cmux は最初の precmd で claude() を自前の関数に入れ直す\n- CMUX_CLAUDE_INTEGRATION_DISABLED で入れ直しを止める\n- ガード通過後は cmux の wrapper を直接呼び、通知連携を保つ\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-30T22:33:13+09:00",
+          "tree_id": "c61b61d37a2a25453c3f661623d2ab791d1867a9",
+          "url": "https://github.com/ixxq/dotfiles/commit/bce6d447bcf3e794c2e920fa551de01800f988ba"
+        },
+        "date": 1793367236744,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 47.72,
+            "range": "5.68 ms",
+            "unit": "ms",
+            "extra": "median: 47.72 ms\nmin: 46.01 ms\nmax: 70.61 ms\nstddev: 5.68 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 48.15,
+            "range": "5.67 ms",
+            "unit": "ms",
+            "extra": "median: 48.15 ms\nmin: 46.4 ms\nmax: 71.01 ms\nstddev: 5.67 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.88,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.88 ms\nmin: 0.83 ms\nmax: 0.92 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 1.75,
+            "range": "6.55 ms",
+            "unit": "ms",
+            "extra": "median: 1.75 ms\nmin: 1.2 ms\nmax: 18.1 ms\nstddev: 6.55 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 37.37,
+            "range": "0.63 ms",
+            "unit": "ms",
+            "extra": "median: 37.37 ms\nmin: 36.92 ms\nmax: 39.51 ms\nstddev: 0.63 ms\nruns: 16"
           }
         ]
       }
