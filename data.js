@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793349430050,
+  "lastUpdate": 1793366419146,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -6140,6 +6140,65 @@ window.BENCHMARK_DATA = {
             "range": "0.44 ms",
             "unit": "ms",
             "extra": "median: 37.8 ms\nmin: 36.87 ms\nmax: 38.37 ms\nstddev: 0.44 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "7329669b7d33094718f7a879223f42603277063b",
+          "message": "refactor(zsh): claude の Downloads ガードを nonlazy.zsh に移す\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-30T22:18:11+09:00",
+          "tree_id": "fafd4fec99c6692f9472033ab89831409ab3b61e",
+          "url": "https://github.com/ixxq/dotfiles/commit/7329669b7d33094718f7a879223f42603277063b"
+        },
+        "date": 1793366417772,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 43.18,
+            "range": "8.23 ms",
+            "unit": "ms",
+            "extra": "median: 43.18 ms\nmin: 36.99 ms\nmax: 73.84 ms\nstddev: 8.23 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 43.7,
+            "range": "8.22 ms",
+            "unit": "ms",
+            "extra": "median: 43.7 ms\nmin: 37.44 ms\nmax: 74.26 ms\nstddev: 8.22 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.89,
+            "range": "0.13 ms",
+            "unit": "ms",
+            "extra": "median: 0.89 ms\nmin: 0.84 ms\nmax: 1.3 ms\nstddev: 0.13 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 9.34,
+            "range": "7.73 ms",
+            "unit": "ms",
+            "extra": "median: 9.34 ms\nmin: 0.99 ms\nmax: 26.14 ms\nstddev: 7.73 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 43.14,
+            "range": "4.93 ms",
+            "unit": "ms",
+            "extra": "median: 43.14 ms\nmin: 37.66 ms\nmax: 58.76 ms\nstddev: 4.93 ms\nruns: 16"
           }
         ]
       }
