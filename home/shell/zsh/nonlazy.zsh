@@ -38,3 +38,10 @@ export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
 
 # make word deletion stop at path separators
 WORDCHARS=""
+
+# ~/Downloads とその配下では claude を起動しない
+# (lazy.zsh だと定義前の貼り付け実行をすり抜けるため同期で読む)
+claude() {
+  [[ $PWD == ~/Downloads(|/*) ]] && return 1
+  command claude "$@"
+}
