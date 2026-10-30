@@ -23,9 +23,9 @@ description: 作業を Orca の新しい worktree と新しい Claude セッシ�
 3. 起動する。
    - 新しく作る:
      ```text
-     orca worktree create --repo path:<リポジトリのパス> --name <issue-番号-短い説明> --issue <番号> --no-parent --agent claude --prompt "<指示>" --json
+     orca worktree create --repo path:<リポジトリのパス> --name <issue-番号-短い説明> --reference <Issue の URL> --no-parent --agent claude --prompt "<指示>" --json
      ```
-     - GitHub の Issue は `--issue`、PR は `--pr` で紐づける。GitHub 以外の URL は `--reference <URL>`。
+     - Issue も PR も完全な URL を `--reference` で渡す。`--issue` / `--pr` は番号しか記録されず、タイトルやリポジトリが紐づかない。`--reference` とも併用できない。
      - 作成元は省いてリポジトリの既定（Orca の設定。例: origin/dev）に任せる。依頼者が作業中のブランチから積み上げるよう頼んだときだけ `--base-branch` を付ける。
      - ブランチ名は Orca の既定に任せる。依頼者が名前を指定したときだけ `--branch` を付ける。
    - すでに作った worktree に渡す:
