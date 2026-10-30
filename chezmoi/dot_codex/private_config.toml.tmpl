@@ -1,7 +1,7 @@
 sandbox_mode = "workspace-write"
 
 notify = [
-  "/Users/t1190078/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
+  "{{ .chezmoi.homeDir }}/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
   "turn-ended",
 ]
 model = "gpt-5.6-sol"
@@ -11,7 +11,7 @@ approvals_reviewer = "guardian_subagent"
 personality = "pragmatic"
 model_reasoning_effort = "max"
 
-[agnets]
+[agents]
 enabled = true
 max_concurrent_threads_per_session = 100
 default_subagent_model = "gpt-5.6-luna"
@@ -54,16 +54,16 @@ startup_timeout_sec = 120
 NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
 NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/t1190078/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
-CODEX_HOME = "/Users/t1190078/.codex"
+NODE_REPL_TRUSTED_CODE_PATHS = "{{ .chezmoi.homeDir }}/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+CODEX_HOME = "{{ .chezmoi.homeDir }}/.codex"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
 BROWSER_USE_CODEX_APP_VERSION = "26.814.41407"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/t1190078/.codex/plugins/cache/openai-bundled/browser/26.814.41407/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
-SKY_CUA_SERVICE_PATH = "/Users/t1190078/.codex/computer-use/Codex Computer Use.app"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"{{ .chezmoi.homeDir }}/.codex/plugins/cache/openai-bundled/browser/26.814.41407/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_SERVICE_PATH = "{{ .chezmoi.homeDir }}/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [mcp_servers.openaiDeveloperDocs]
@@ -78,12 +78,12 @@ enabled = false
 [marketplaces.openai-bundled]
 last_updated = "2026-08-19T07:52:08Z"
 source_type = "local"
-source = "/Users/t1190078/.codex/.tmp/bundled-marketplaces/openai-bundled"
+source = "{{ .chezmoi.homeDir }}/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
 last_updated = "2026-08-19T00:36:52Z"
 source_type = "local"
-source = "/Users/t1190078/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+source = "{{ .chezmoi.homeDir }}/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.agent-toolkit-for-aws]
 last_updated = "2026-08-19T07:52:08Z"
@@ -298,112 +298,112 @@ enabled = true
 [plugins."ponytail@ponytail"]
 enabled = true
 
-[projects."/Users/t1190078/.dotfiles"]
+[projects."{{ .chezmoi.homeDir }}/.dotfiles"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/tip-extra/tipextra-frontend"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/tip-extra/tipextra-frontend"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/haisou/haisou-kanri_backend"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/haisou/haisou-kanri_backend"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/apps/dpca-baseproject"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/apps/dpca-baseproject"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/apps/booklift_v2"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/apps/booklift_v2"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/next-server-devtools"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/next-server-devtools"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-06-10/mise-up-mise-warn-github-rate"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-06-10/mise-up-mise-warn-github-rate"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/apps/safety-training-management"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/apps/safety-training-management"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/tip-extra/tipextra-backend"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/tip-extra/tipextra-backend"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-06-18/aws-codeartfict"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-06-18/aws-codeartfict"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/awsctx"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/awsctx"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/private/zenn-content"]
+[projects."{{ .chezmoi.homeDir }}/dev/private/zenn-content"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/private/sandbox/safety-training-management"]
+[projects."{{ .chezmoi.homeDir }}/dev/private/sandbox/safety-training-management"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/apps/koutei"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/apps/koutei"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/aws-cli"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/aws-cli"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/ni"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/ni"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-06-25/cod"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-06-25/cod"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/nova"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/nova"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-07-10/openai-codex-github-issue-discussion-gpt"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-07-10/openai-codex-github-issue-discussion-gpt"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-07-10/openai-codex-github-issue-discussion-gpt-2"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-07-10/openai-codex-github-issue-discussion-gpt-2"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Mounts/s3"]
+[projects."{{ .chezmoi.homeDir }}/Mounts/s3"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/slides/templates"]
+[projects."{{ .chezmoi.homeDir }}/dev/slides/templates"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/cost-pilot/cost-pilot"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/cost-pilot/cost-pilot"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/.config/rclone"]
+[projects."{{ .chezmoi.homeDir }}/.config/rclone"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-07-16/plugin-computer-use-openai-bundled-play"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-07-16/plugin-computer-use-openai-bundled-play"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/RunCatNeo"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/RunCatNeo"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/private/xrryx"]
+[projects."{{ .chezmoi.homeDir }}/dev/private/xrryx"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/codex"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/codex"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/haisou/haisou-kanri"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/haisou/haisou-kanri"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-07-21/n"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-07-21/n"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/haisou/internal-delivery-backend"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/haisou/internal-delivery-backend"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/work/haisou/internal-delivery"]
+[projects."{{ .chezmoi.homeDir }}/dev/work/haisou/internal-delivery"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/dev/oss/CodexBar"]
+[projects."{{ .chezmoi.homeDir }}/dev/oss/CodexBar"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-07-27/new-chat"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-07-27/new-chat"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-08-03/request-user-input"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-08-03/request-user-input"]
 trust_level = "trusted"
 
-[projects."/Users/t1190078/Documents/Codex/2026-08-03/request-user-input-test"]
+[projects."{{ .chezmoi.homeDir }}/Documents/Codex/2026-08-03/request-user-input-test"]
 trust_level = "trusted"
 
 [tui.model_availability_nux]
@@ -412,32 +412,32 @@ trust_level = "trusted"
 
 [hooks.state]
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:stop:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:stop:0:0"]
 trusted_hash = "sha256:73c1676bce56e5723db9242579430a620d6740cd7fb35bc3173c2133e0449d0a"
 enabled = true
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:pre_tool_use:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:74f1aa389a7b0a169724e888b4f917b67ece51100732c6c5c90a62573889b5e6"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:permission_request:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:permission_request:0:0"]
 trusted_hash = "sha256:ff6d182894f680a390f112b1cb8d9e7f23a5d2a9770587c3e9f73a5daeb175a3"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:post_tool_use:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:post_tool_use:0:0"]
 trusted_hash = "sha256:2ca650c196ab625cc56f384126653b63d5fa56e8fa012cc55d3d120cecb6b665"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:session_start:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:session_start:0:0"]
 trusted_hash = "sha256:8ec2f293172a99be09d9b65743479f217c8d0f24d33ca629fe10d8e875866a51"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:user_prompt_submit:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:user_prompt_submit:0:0"]
 trusted_hash = "sha256:1994c9f14444ca79b08b80075b67ee18cd40e99d70097b507c395b1d7dc57bb4"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:subagent_start:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:subagent_start:0:0"]
 trusted_hash = "sha256:f5649c8acfdfbac093cd520d232986a2692f370850b174db1d13fc091ca67657"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:subagent_stop:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:subagent_stop:0:0"]
 trusted_hash = "sha256:3bb1b5698851a4cb59b06217761e4aca80c132daa04ecf23907de798bca80759"
 
-[hooks.state."/Users/t1190078/.codex/hooks.json:stop:1:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/hooks.json:stop:1:0"]
 trusted_hash = "sha256:f4a4606a8eaf79e543104cf13eb6e95791fe4b0ab616ac78dccad7a85a8fc7b4"
 
 # >>> agent-monitor hooks >>>
@@ -446,112 +446,112 @@ trusted_hash = "sha256:f4a4606a8eaf79e543104cf13eb6e95791fe4b0ab616ac78dccad7a85
 matcher = "*"
 [[hooks.SessionStart.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.UserPromptSubmit]]
 matcher = "*"
 [[hooks.UserPromptSubmit.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.PreToolUse]]
 matcher = "*"
 [[hooks.PreToolUse.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.PostToolUse]]
 matcher = "*"
 [[hooks.PostToolUse.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.PermissionRequest]]
 matcher = "*"
 [[hooks.PermissionRequest.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.PreCompact]]
 matcher = "*"
 [[hooks.PreCompact.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.PostCompact]]
 matcher = "*"
 [[hooks.PostCompact.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.SubagentStart]]
 matcher = "*"
 [[hooks.SubagentStart.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.SubagentStop]]
 matcher = "*"
 [[hooks.SubagentStop.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.Stop]]
 matcher = "*"
 [[hooks.Stop.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 
 [[hooks.Interrupt]]
 matcher = "*"
 [[hooks.Interrupt.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 timeout = 3
 
 [[hooks.SessionEnd]]
 matcher = "*"
 [[hooks.SessionEnd.hooks]]
 type = "command"
-command = '''/Users/t1190078/.local/share/sidepulse/venv/bin/python /Users/t1190078/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log /Users/t1190078/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
+command = '''{{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/bin/python {{ .chezmoi.homeDir }}/.local/share/sidepulse/venv/lib/python3.13/site-packages/sidepulse/hook_entry.py --provider codex --log {{ .chezmoi.homeDir }}/.local/state/sidepulse/agent-monitor/codex.jsonl ; true'''
 timeout = 3
 
 # <<< agent-monitor hooks <<<
 
 # SidePulse hooks already approved on this Mac; review /hooks after path or command changes.
 
-[hooks.state."/Users/t1190078/.codex/config.toml:pre_tool_use:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:pre_tool_use:0:0"]
 trusted_hash = "sha256:4290a9136ae08f433ecb9d700c96b11ae663521c741b405659db001cb5ae8cb6"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:permission_request:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:permission_request:0:0"]
 trusted_hash = "sha256:9266b43a2cc86347f7fb0b03fb5bf6efde4058c92d1c35f76a4dee60b9253eee"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:post_tool_use:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:post_tool_use:0:0"]
 trusted_hash = "sha256:6a54c8ff86e7fbd6e0ed14a349949066d6492cccb24ba1589710b75cc7a22713"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:pre_compact:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:pre_compact:0:0"]
 trusted_hash = "sha256:1b1bd3a082f704d4aec7883a825efe59679f8c0fd9d47aea820ade61a312d9d1"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:post_compact:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:post_compact:0:0"]
 trusted_hash = "sha256:c9828d7dd8044cefd8ef05104637fb25af892bceafb8c45bb3dec5aafe892956"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:session_start:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:session_start:0:0"]
 trusted_hash = "sha256:70519109273613ae7d099a950fa559a15801c277b2693d5839aa142dced217f0"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:user_prompt_submit:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:user_prompt_submit:0:0"]
 trusted_hash = "sha256:0cdc0aa52d736a3bc48f6dec15a87e0fd5967b9575cf69b3398ae743715c4806"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:subagent_start:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:subagent_start:0:0"]
 trusted_hash = "sha256:bcf36fbf397484eac1b65b7c919857999aff80cb5031da4ca37427b4e34c853d"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:subagent_stop:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:subagent_stop:0:0"]
 trusted_hash = "sha256:b056ea8d47689cfb626bfd822159c665488f5a67c82fa10d8f0a65ce478aa32a"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:stop:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:stop:0:0"]
 trusted_hash = "sha256:8fed9a6e2172f240c4ffbe4ca0b7f413416904a06bf8abf2ea168f969556adba"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:interrupt:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:interrupt:0:0"]
 trusted_hash = "sha256:45c3ed0877ad566846758b758b58adf94a93d27a41938ffd165fa5c6f75b6bb9"
 
-[hooks.state."/Users/t1190078/.codex/config.toml:session_end:0:0"]
+[hooks.state."{{ .chezmoi.homeDir }}/.codex/config.toml:session_end:0:0"]
 trusted_hash = "sha256:55fc4c96ef3d329a3f6e498db205bd168a1fe6aaf095d36186364499eb69b194"
