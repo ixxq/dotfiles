@@ -5,20 +5,35 @@ description: 作業を Orca の新しい worktree と新しい Claude セッシ�
 
 # handoff
 
-「新規ワークツリーで」は、Orca 管理の worktree を作り、新しい Claude セッションに作業を渡すこと。自分のセッションで `git worktree add` して作業を続けることではない。
+「新規ワークツリーで」は、Orca 管理の worktree を作り、新しい Claude セッションに作業を渡すこと。自分のセッションで `git worktree add` して作業を続けることではない。よくある流れは、このセッションで Issue を起票し、その Issue の作業を新しい worktree に振る形。
+
+## 何を渡すか決める
+
+- 引数に Issue や PR の番号、URL があれば、それを渡す。
+- 引数がなければ、この会話で直前に起票したか話していた Issue を渡す。どれを指すか一つに決まらないときや、Issue がないときは、何を渡すかを短く尋ねる。
 
 ## 手順
 
 1. orca-cli スキルで CLI を解決し、ガイドを読む（`orca skills get orca-cli`）。
 2. 渡す指示を書く。次を入れる。
-   - Issue や PR の番号と URL、作業の目的
-   - すでに決まったこと、調べて分かったこと、済んだ作業（未コミットの変更があればファイルと内容）
-   - 残りの作業を順番に
+   - Issue の番号と URL。まず Issue を読んでから始めるよう書く
+   - この会話で決まったこと、調べて分かったこと、済んだ作業（未コミットの変更があればファイルと内容）
+   - 残りの作業を順番に（Issue に書いてあれば、そちらを見るよう書けばよい）
    - その作業で守る約束事（コミットメッセージ、PR の作り方、push とマージの扱い、レビューへの返信の仕方など。メモリや CLAUDE.md にあるものを書き写す）
 3. 起動する。
-   - 新しく作る: `orca worktree create --name <短い名前> --no-parent --agent claude --prompt "<指示>" --json`（ベースはリポジトリの既定。作業中のブランチから積み上げるよう頼まれたときだけ `--base-branch` を付ける）
-   - すでに作った worktree に渡す: `orca agent launch --agent claude --worktree id:<repoId>::<path> --prompt "<指示>" --json`（id は `orca worktree list --json` で調べる）
-4. 結果の `launch.prompt.outcome` が `journaled` か `handed-to-terminal` なら渡せている。worktree の id と、`launch.outcome.handle` を依頼者に伝えて終える。
+   - 新しく作る:
+     ```text
+     orca worktree create --repo path:<リポジトリのパス> --name <issue-番号-短い説明> --issue <番号> --no-parent --agent claude --prompt "<指示>" --json
+     ```
+     - GitHub の Issue は `--issue`、PR は `--pr` で紐づける。GitHub 以外の URL は `--reference <URL>`。
+     - 作成元は省いてリポジトリの既定（Orca の設定。例: origin/dev）に任せる。依頼者が作業中のブランチから積み上げるよう頼んだときだけ `--base-branch` を付ける。
+     - ブランチ名は Orca の既定に任せる。依頼者が名前を指定したときだけ `--branch` を付ける。
+   - すでに作った worktree に渡す:
+     ```text
+     orca agent launch --agent claude --worktree id:<repoId>::<path> --prompt "<指示>" --json
+     ```
+     id は `orca worktree list --json` で調べる。
+4. 結果の `launch.prompt.outcome` が `journaled` か `handed-to-terminal` なら渡せている。worktree の id と `launch.outcome.handle` を依頼者に伝えて終える。
 
 ## やらないこと
 
