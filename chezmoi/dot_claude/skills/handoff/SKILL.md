@@ -26,6 +26,10 @@ description: 作業を Orca の新しい worktree と新しい Claude セッシ�
      orca worktree create --repo path:<リポジトリのパス> --name <issue-番号-短い説明> --reference <Issue の URL> --no-parent --agent claude --prompt "<指示>" --json
      ```
      - Issue も PR も完全な URL を `--reference` で渡す。`--issue` / `--pr` は番号しか記録されず、タイトルやリポジトリが紐づかない。`--reference` とも併用できない。
+     - `--name` はフォルダー名とブランチ名に使われるので英数字の短い名前にし、作成後に表示名を Issue のタイトルに変える。先頭の `[問い合わせ]` や `[BUG]` などのラベルは外し、長ければ 20 字ほどに縮める。
+       ```text
+       orca worktree set --worktree id:<作成結果の worktree.id> --display-name "<表示名>" --json
+       ```
      - 作成元は省いてリポジトリの既定（Orca の設定。例: origin/dev）に任せる。依頼者が作業中のブランチから積み上げるよう頼んだときだけ `--base-branch` を付ける。
      - ブランチ名は Orca の既定に任せる。依頼者が名前を指定したときだけ `--branch` を付ける。
    - すでに作った worktree に渡す:
