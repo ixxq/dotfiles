@@ -41,7 +41,15 @@ WORDCHARS=""
 
 # ~/Downloads とその配下では claude を起動しない
 # (lazy.zsh だと定義前の貼り付け実行をすり抜けるため同期で読む)
+# cmux 内では cmux の wrapper (通知用 hook を注入) を通す
 claude() {
   [[ $PWD == ~/Downloads(|/*) ]] && return 1
-  command claude "$@"
+  if (( $+functions[_cmux_claude_wrapper_command] )); then
+    _cmux_claude_wrapper_command "$@"
+  else
+    command claude "$@"
+  fi
 }
+# cmux が最初の precmd で claude() を自前の関数に入れ直すのを止める。
+# export すると子シェルで cmux の wrapper 自体が入らなくなるのでシェル変数にとどめる
+CMUX_CLAUDE_INTEGRATION_DISABLED=1
