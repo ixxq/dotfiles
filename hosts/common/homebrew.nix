@@ -10,6 +10,7 @@ let
     "ixxq/tap"
     "manaflow-ai/cmux"
     "productdevbook/tap"
+    "stablyai/orca"
     "watrix811/tap"
     "fif7y/tap"
     # Keep the upstream tap available for switching back.
@@ -58,7 +59,6 @@ in
       "font-udev-gothic-nf"
       "ghostty"
       "google-chrome"
-      "jordanbaird-ice@beta"
       "karabiner-elements"
       "logi-options+"
       "microsoft-office"
