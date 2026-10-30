@@ -62,6 +62,12 @@ mcd() {
   fi
 }
 
+# ~/Downloads とその配下では claude を起動しない
+claude() {
+  [[ $PWD == ~/Downloads(|/*) ]] && return 1
+  command claude "$@"
+}
+
 toggle-env() {
   local dir="${1:-.}"
   if [ -f "$dir/.env.stg" ]; then
