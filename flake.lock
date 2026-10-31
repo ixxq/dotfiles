@@ -86,11 +86,11 @@
         "vhs-nixpkgs": "vhs-nixpkgs"
       },
       "locked": {
-        "lastModified": 1788804785,
-        "narHash": "sha256-mbPYtkPOijD+zGE2fMN3vvhDHCnC/15ZwJt2IkxqvdQ=",
+        "lastModified": 1793438877,
+        "narHash": "sha256-mpTHuCt1NPBYoYMLMBpDTuA0rSfHUzKgYRAH+KZXcgs=",
         "owner": "ixxq-labs",
         "repo": "nova",
-        "rev": "cfcd1ce90e377a8f1316768be13ce39eb6917ae3",
+        "rev": "4acb75dd0b7ebcfb7c7325c6c7bd622e8f5381d7",
         "type": "github"
       },
       "original": {
