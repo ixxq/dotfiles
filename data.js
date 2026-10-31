@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793367238242,
+  "lastUpdate": 1793465900762,
   "repoUrl": "https://github.com/ixxq/dotfiles",
   "entries": {
     "Zsh Startup Time": [
@@ -6258,6 +6258,65 @@ window.BENCHMARK_DATA = {
             "range": "0.63 ms",
             "unit": "ms",
             "extra": "median: 37.37 ms\nmin: 36.92 ms\nmax: 39.51 ms\nstddev: 0.63 ms\nruns: 16"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "committer": {
+            "email": "83203852+ixxq@users.noreply.github.com",
+            "name": "ixxq",
+            "username": "ixxq"
+          },
+          "distinct": true,
+          "id": "f9e109b9d06f7ae76579e20dd7637bf6843d251b",
+          "message": "feat(nova): 実行済みのプロンプトを transient 表示にする\n\n- `[layout]` に `transient = [\"dir\", \"exit_status\", \"prompt_char\"]` を追加\n- 確定した行はディレクトリ・終了ステータス・プロンプト文字だけを残して短く表示する\n- 新しい nova を使うため flake.lock の nova を 4acb75d に更新\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-11-01T01:56:56+09:00",
+          "tree_id": "70a8710fa1ea50be2ff11bb4f84bcb59250e5768",
+          "url": "https://github.com/ixxq/dotfiles/commit/f9e109b9d06f7ae76579e20dd7637bf6843d251b"
+        },
+        "date": 1793465899568,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "first prompt lag",
+            "value": 46.07,
+            "range": "5.86 ms",
+            "unit": "ms",
+            "extra": "median: 46.07 ms\nmin: 44.7 ms\nmax: 69.89 ms\nstddev: 5.86 ms\nruns: 16"
+          },
+          {
+            "name": "first command lag",
+            "value": 46.5,
+            "range": "5.86 ms",
+            "unit": "ms",
+            "extra": "median: 46.5 ms\nmin: 45.12 ms\nmax: 70.34 ms\nstddev: 5.86 ms\nruns: 16"
+          },
+          {
+            "name": "command lag",
+            "value": 0.91,
+            "range": "0.02 ms",
+            "unit": "ms",
+            "extra": "median: 0.91 ms\nmin: 0.88 ms\nmax: 0.95 ms\nstddev: 0.02 ms\nruns: 16"
+          },
+          {
+            "name": "input lag",
+            "value": 2.71,
+            "range": "6.16 ms",
+            "unit": "ms",
+            "extra": "median: 2.71 ms\nmin: 1.23 ms\nmax: 16.51 ms\nstddev: 6.16 ms\nruns: 16"
+          },
+          {
+            "name": "exit time",
+            "value": 36.44,
+            "range": "2.37 ms",
+            "unit": "ms",
+            "extra": "median: 36.44 ms\nmin: 35.61 ms\nmax: 45.85 ms\nstddev: 2.37 ms\nruns: 16"
           }
         ]
       }
